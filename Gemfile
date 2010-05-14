@@ -17,5 +17,6 @@ group :development do
   gem 'celerity', :require => nil
 
   gem 'yard', '~> 0.5'
+  gem 'rcov'
   gem 'ci_reporter', '~> 1.6'
 end
