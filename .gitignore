@@ -3,3 +3,4 @@ bcsec-rails*.gem
 
 reports
 coverage
+ci_bin
