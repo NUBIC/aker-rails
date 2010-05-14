@@ -1,2 +1,5 @@
 .bundle
 bcsec-rails*.gem
+
+reports
+coverage
