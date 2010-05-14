@@ -15,6 +15,9 @@ group :development do
   gem 'culerity', '~> 0.2'
 
   gem 'yard', '~> 0.5'
+  gem 'rdiscount'
+  gem 'fssm'
+
   gem 'rcov'
   gem 'ci_reporter', '~> 1.6'
 end
