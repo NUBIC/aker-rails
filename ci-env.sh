@@ -24,7 +24,7 @@ echo "Adding jruby to the PATH for culerity"
 set +x
 rvm use "${BCSEC_JRUBY}" # ensure it is installed
 set -x
-gem list -i celerity -v $CELERITY_VERSION
+`gem list -i celerity -v $CELERITY_VERSION`
 if [ $? -ne 0 ]; then
   gem install celerity -v 0.7.9
 fi
