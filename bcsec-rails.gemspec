@@ -4,34 +4,12 @@ $:.unshift lib unless $:.include?(lib)
 
 require 'bcsec/rails/version'
 
-# Evaluates a gemfile and appends the deps to a gemspec.
-# Later versions of bundler may have a method for this.
-class GemfileGemspecDeps
-  def initialize(gemspec)
-    @gem = gemspec
-    instance_eval File.read('Gemfile')
-  end
-
-  def method_missing(msg, *args)
-    # skip unimplemented bits
-  end
-
-  def gem(name, version=nil, opts={})
-    version = nil unless String === version # screen out gem 'name', opts
-    if @group && @group.include?(:development)
-      @gem.add_development_dependency(name, version)
-    else
-      @gem.add_runtime_dependency(name, version)
-    end
-  end
-
-  def group(*kinds)
-    @group = kinds
-    yield
-    @group = nil
-  end
+require 'rubygems'
+begin
+  require 'bundler'
+rescue LoadError
+  fail "Evaluating this gemspec requires bundler.  Install it and then try again."
 end
-
 
 Gem::Specification.new do |s|
   s.name = 'bcsec-rails'
@@ -39,7 +17,7 @@ Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.summary = "Bioinformatics core security infrastructure plugin for rails"
 
-  GemfileGemspecDeps.new(s)
+  s.add_bundler_dependencies
 
   s.require_path = 'lib'
   s.files = Dir.glob("{CHANGELOG,README,VERSION,{lib,spec}/**/*}")
