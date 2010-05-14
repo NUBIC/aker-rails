@@ -26,6 +26,10 @@ dependencies:
     group: 
     - :default
     version: ">= 2.0.0.pre"
+  culerity: 
+    group: 
+    - :development
+    version: ~> 0.2
   ci_reporter: 
     group: 
     - :development
@@ -34,10 +38,6 @@ dependencies:
     group: 
     - :development
     version: ~> 0.7.0
-  capybara: 
-    group: 
-    - :development
-    version: ~> 0.3
 specs: 
 - rake: 
     version: 0.8.7
@@ -70,22 +70,6 @@ specs:
     source: 0
 - builder: 
     version: 2.1.2
-- culerity: 
-    version: 0.2.10
-- mime-types: 
-    version: "1.16"
-- nokogiri: 
-    version: 1.4.1
-- rack-test: 
-    version: 0.5.3
-- ffi: 
-    version: 0.6.3
-- json_pure: 
-    version: 1.4.3
-- selenium-webdriver: 
-    version: 0.0.18
-- capybara: 
-    version: 0.3.7
 - celerity: 
     version: 0.7.9
 - ci_reporter: 
@@ -96,21 +80,25 @@ specs:
     version: 1.16.2
 - gherkin: 
     version: 1.0.26
+- json_pure: 
+    version: 1.4.3
 - term-ansicolor: 
     version: 1.0.5
 - cucumber: 
     version: 0.7.2
+- culerity: 
+    version: 0.2.10
 - rails: 
     version: 2.3.5
 - rspec: 
     version: 1.3.0
 - yard: 
     version: 0.5.4
-hash: f17d000a1a9d3f3aeef3a320237f1ccbb042a3fc
+hash: 0176950b01cddaa9d5f6a7cfd057039c3065d898
 sources: 
 - Git: 
     uri: git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git
     git: git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git
-    ref: 36f784498b1276988a48c95270b0ac0c82a4df3b
+    ref: e1a1c8d39262dedb1cacd61e1cb63f68313e5862
 - Rubygems: 
     uri: http://gemcutter.org

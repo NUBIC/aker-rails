@@ -1,5 +1,8 @@
 Feature: Interactive authentication
 
+  Background:
+    Given I am using the user interface
+
   Scenario: When accessing a public page, no authentication is required
     Given no one is logged in
      When I access a public page
@@ -16,3 +19,8 @@ Feature: Interactive authentication
     Given I am logged in as mr296
      When I access a protected page
      Then I can access that protected page
+
+  Scenario: When accessing a public page while logged in, the user is available
+    Given I am logged in as mr296
+     When I access a public page
+     Then the page contains "Even mr296"

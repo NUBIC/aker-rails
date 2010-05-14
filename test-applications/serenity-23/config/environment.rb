@@ -41,8 +41,4 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
 end
 
-Bcsec.configure do
-  portal :Serenity
-
-  authority Bcsec::Authorities::Static.from_file(File.expand_path("../users.yml", __FILE__))
-end
+Rails.logger.warn "Bcsec::Rails::VERSION: " + Bcsec::Rails::VERSION
