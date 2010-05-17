@@ -35,6 +35,8 @@ Then /^I can access that (\S+) page$/ do |page_name|
     case page_name
     when 'public'
       /^Anyone can see this./
+    when 'protected'
+      /^I'm protected/
     else
       pending "No pattern defined for the content of a #{page_name} page"
     end
