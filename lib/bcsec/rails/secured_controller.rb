@@ -13,5 +13,18 @@ module Bcsec::Rails
 end
 
 module Bcsec
-  SecuredController = Rails::SecuredController
+  class << self
+    alias :prerails_const_missing :const_missing
+
+    def const_missing(name)
+      case name
+      when :SecuredController
+        Bcsec::Deprecation.
+          notify("Use Bcsec::Rails::SecuredController instead of Bcsec::SecuredController.", "2.2")
+        Bcsec::Rails::SecuredController
+      else
+        prerails_const_missing(name)
+      end
+    end
+  end
 end

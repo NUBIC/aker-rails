@@ -1,5 +1,5 @@
 class ProtectedController < ApplicationController
-  include Bcsec::SecuredController
+  include Bcsec::Rails::SecuredController
 
   def authentication_only
   end

@@ -21,8 +21,16 @@ module Bcsec::Rails
   end
 
   describe SecuredController do
-    it "is aliased as Bcsec::SecuredController" do
-      ::Bcsec::Rails::SecuredController.should == ::Bcsec::SecuredController
+    describe "deprecated alias" do
+      it "is aliased as Bcsec::SecuredController" do
+        ::Bcsec::Rails::SecuredController.should == ::Bcsec::SecuredController
+      end
+
+      it "warns about using Bcsec::SecuredController" do
+        ::Bcsec::SecuredController
+        deprecation_message.should =~
+          /Use Bcsec::Rails::SecuredController instead of Bcsec::SecuredController.*2.2/
+      end
     end
 
     before do
