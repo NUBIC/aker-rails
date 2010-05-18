@@ -9,8 +9,14 @@ module Bcsec::Rails
       @request = request
     end
 
-    def self.before_filter(*args)
-      self.before_filters.concat(args)
+    def self.before_filter(*args, &block)
+      filter =
+        if block
+          block
+        else
+          args.shift
+        end
+      self.before_filters << [filter, *args]
     end
 
     def self.before_filters
@@ -41,12 +47,32 @@ module Bcsec::Rails
 
     describe "#bcsec_authorize" do
       it "is registered as a filter" do
-        @controller.class.before_filters.should == [:bcsec_authorize]
+        @controller.class.before_filters.should == [ [:bcsec_authorize] ]
       end
 
       it "invokes authentication_required on the bcsec rack facade" do
         @bcsec.should_receive(:authentication_required!)
         @controller.bcsec_authorize
+      end
+    end
+
+    describe ".permit" do
+      it "adds a filter" do
+        @controller.class.permit(:foo, :quux)
+        @controller.class.should have(2).before_filters
+        @controller.class.before_filters.last[0].class.should == Proc
+      end
+
+      describe "and options" do
+        it "passes options on to before_filter" do
+          @controller.class.permit(:foo, :quux, :only => :zamm)
+          @controller.class.before_filters.last[1].should == { :only => :zamm }
+        end
+
+        it "passes empty options if no options are specified" do
+          @controller.class.permit(:foo, :quux, :vom)
+          @controller.class.before_filters.last[1].should == {}
+        end
       end
     end
 

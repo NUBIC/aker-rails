@@ -6,8 +6,8 @@ module Bcsec::Rails
   class FakeApplicationController
     attr_accessor :request
 
-    def self.helper_method(name)
-      helper_methods << name
+    def self.helper_method(*names)
+      helper_methods.concat(names)
     end
 
     def self.helper_methods
@@ -24,12 +24,12 @@ module Bcsec::Rails
       @controller = FakeApplicationController.new
 
       @env = Rack::MockRequest.env_for('/')
+      @env['bcsec'] = (@bcsec = mock)
       @controller.request = Rack::Request.new(@env)
     end
 
     it "adds current_user" do
-      @env['bcsec'] = mock
-      @env['bcsec'].should_receive(:user).and_return(Bcsec::User.new("jo"))
+      @bcsec.should_receive(:user).and_return(Bcsec::User.new("jo"))
 
       @controller.current_user.username.should == "jo"
     end
@@ -40,6 +40,36 @@ module Bcsec::Rails
 
     it "adds the bcsec middleware to the action controller middleware stack" do
       ActionController::Dispatcher.middleware.should include(Bcsec::Rack::Setup)
+    end
+
+    describe "#permit?" do
+      it "delegates to the bcsec rack facade" do
+        @bcsec.should_receive(:permit?).with(:bar, :quux)
+
+        @controller.permit?(:bar, :quux)
+      end
+
+      it "passes a block to the bcsec rack facade, if present" do
+        @bcsec.should_receive(:permit?).with(:bar, :quux).and_yield
+
+        @controller.permit?(:bar, :quux) { 1 + 1 }.should == 2
+      end
+
+      it "is registered as a helper method" do
+        @controller.class.helper_methods.should include(:permit?)
+      end
+
+      describe "permit alias" do
+        it "exists" do
+          @bcsec.should_receive(:permit?).with(:bar, :baz)
+
+          @controller.permit(:bar, :baz)
+        end
+
+        it "is also registered as a helper method" do
+          @controller.class.helper_methods.should include(:permit)
+        end
+      end
     end
   end
 end

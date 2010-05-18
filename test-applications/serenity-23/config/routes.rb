@@ -33,6 +33,9 @@ ActionController::Routing::Routes.draw do |map|
   # See how all your routes lay out with "rake routes"
 
   map.root :controller => 'public', :action => 'view', :format => 'text'
+  map.connect 'portal', :controller => 'public', :action => 'portal', :format => 'text'
   map.connect 'protected',
     :controller => 'protected', :action => 'authentication_only', :format => 'text'
+  map.connect 'owners',
+    :controller => 'permit', :action => 'owners_only', :format => 'text'
 end

@@ -15,7 +15,7 @@ module Bcsec::Rails
     def self.included(controller_class)
       Bcsec::Rack.use_in(ActionController::Dispatcher.middleware)
       controller_class.class_eval do
-        helper_method :current_user
+        helper_method :current_user, :permit?, :permit
       end
     end
 
@@ -27,5 +27,10 @@ module Bcsec::Rails
     def current_user
       request.env["bcsec"].user
     end
+
+    def permit?(*groups, &block)
+      request.env["bcsec"].permit?(*groups, &block)
+    end
+    alias :permit :permit?
   end
 end
