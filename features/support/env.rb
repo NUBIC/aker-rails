@@ -55,12 +55,16 @@ module Bcsec::Rails
         start_app
       end
 
+      def self.in_ci?
+        ENV['BUILD_ID']
+      end
+
       def self.start_app
         FileUtils.cd APP_BASE do
           clean_rubyopt = (ENV['RUBYOPT'] || '').split(' ').reject { |o| o =~ /bundler/ }.join(' ')
           bundle_env="BUNDLE_GEMFILE=\"#{APP_BASE}/Gemfile\" RUBYOPT=\"#{clean_rubyopt}\""
           system("#{bundle_env} bundle check > /dev/null")
-          unless $? == 0
+          unless $? == 0 || in_ci?
             # don't lock unless bundler-327 is fixed
             system("#{bundle_env} bundle install")
           end
