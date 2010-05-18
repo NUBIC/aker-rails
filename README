@@ -15,6 +15,7 @@ application's Gemfile.
 
 #### Okay
 
+    !!!plain
     $ gem sources -a http://download.bioinformatics.northwestern.edu/gems
     $ gem install bcsec-rails
 

@@ -4,14 +4,12 @@ module Bcsec::Rails
   ##
   # A mixin for the rails application controller.  Provides global
   # bcsec integration, but does not enforce any authentication or
-  # authorization requirements.
+  # authorization requirements.  (See
+  # {Bcsec::Rails::SecuredController} for one way to enforce
+  # authentication and authorization.)
   #
   # This module is automatically mixed into the application controller
   # when the plugin is initialized.
-  #
-  # In order to force authentication or group membership for a all
-  # controllers in an app, mix in {Bcsec::Rails::SecuredController} on
-  # top of this module in `ApplicationController`.
   module Application
     ##
     # Sets up the bcsec global infrastructure and helpers in the

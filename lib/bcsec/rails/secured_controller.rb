@@ -14,6 +14,10 @@ module Bcsec::Rails
   #       permit :confidential
   #     end
   module SecuredController
+    ##
+    # @private implements the behavior described by the module
+    #   description
+    # @return [void]
     def self.included(controller_class)
       controller_class.before_filter :bcsec_authorize
       controller_class.extend ClassMethods
@@ -61,10 +65,14 @@ module Bcsec::Rails
   end
 end
 
+##
+# @private documented in main gem
 module Bcsec
   class << self
     alias :prerails_const_missing :const_missing
 
+    ##
+    # @private -- provides deprecated features only
     def const_missing(name)
       case name
       when :SecuredController
