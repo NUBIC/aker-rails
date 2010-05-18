@@ -63,7 +63,7 @@ namespace :cucumber do
 end
 
 desc "Build API documentation with yard"
-docsrc = %w(lib/**/*.rb -) + Dir.glob("{CHANGELOG,README}")
+docsrc = %w(lib/**/*.rb -) + Dir.glob("{CHANGELOG,README,MIGRATION}")
 YARD::Rake::YardocTask.new do |t|
   t.options = %w(--no-private --markup markdown)
   t.files = docsrc

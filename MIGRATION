@@ -1,0 +1,23 @@
+Bcsec-Rails migration notes
+===========================
+
+If you are upgrading a rails application which used Bcsec 1.x or
+earlier, this guide's for you.  You will also want to check out the
+{file:README}.
+
+This guide only covers the Bcsec-Rails-specific parts of the migration.  The
+general Bcsec parts are covered in its own `MIGRATION` doc.
+
+Steps
+-----
+
+1.  Remove the old `bcsec` plugin.
+    
+        $ rm vendor/plugins/bcsec
+        $ svn propedit svn:externals vendor/plugins # if using an external
+
+2.  Install the `bcsec-rails` gem per the {file:README}.
+
+3.  Run your application and/or integration tests and address any
+    deprecation warnings.  For more details, see bcsec's `MIGRATION`
+    docs.

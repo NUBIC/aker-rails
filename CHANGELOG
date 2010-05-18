@@ -1,0 +1,17 @@
+Bcsec-Rails History
+===================
+
+2.0.0
+-----
+
+### Features
+
+- Package bcsec-rails as a gem
+- Namespace everything under `Bcsec::Rails`
+
+### Development
+
+- Full integrated test suite with cucumber, celerity, and a sample app
+- Full API documentation
+- Start tracking changes to the plugin
+- Move to internal git repo
