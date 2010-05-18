@@ -8,9 +8,15 @@ module Bcsec::Rails
   #
   # This module is automatically mixed into the application controller
   # when the plugin is initialized.
+  #
+  # In order to force authentication or group membership for a all
+  # controllers in an app, mix in {Bcsec::Rails::SecuredController} on
+  # top of this module in `ApplicationController`.
   module Application
     ##
-    # Sets up helpers in the application controller.
+    # Sets up the bcsec global infrastructure and helpers in the
+    # application controller.
+    #
     # @return [void]
     def self.included(controller_class)
       Bcsec::Rack.use_in(ActionController::Dispatcher.middleware)
@@ -20,14 +26,25 @@ module Bcsec::Rails
     end
 
     ##
-    # Exposes the logged-in user (if any) to the application.  This
-    # method is also available to views (i.e., it is a helper).
+    # Exposes the logged-in user (if any) to the application.
+    #
+    # This method is also available to views (i.e., it is a helper).
     #
     # @return [Bcsec::User,nil]
     def current_user
       request.env["bcsec"].user
     end
 
+    ##
+    # Aids group-level authorization.  It is safe to call this method
+    # without checking that there is a logged in user first.
+    #
+    # This method delegates directly to `Bcsec::Rack::Facade#permit?`;
+    # see the documentation for that method for more information.
+    #
+    # This method is also available to views (i.e., it is a helper).
+    #
+    # @return [Boolean,Object,nil]
     def permit?(*groups, &block)
       request.env["bcsec"].permit?(*groups, &block)
     end
