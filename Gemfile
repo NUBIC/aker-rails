@@ -4,7 +4,7 @@ source :rubygems
 # change much less frequently than the library.
 gem 'bcsec', '>= 2.0.0.pre', :git => 'git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git'
 
-gem 'rails', '~> 2.3.5' # for now; 2.1 will support Rails 3
+gem 'rails', '2.3.5' # for now; 2.1 will support Rails 3
 
 group :development do
   gem 'rake', '~> 0.8'
