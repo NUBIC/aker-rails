@@ -30,6 +30,10 @@ dependencies:
     group: 
     - :default
     version: ">= 2.0.0.pre"
+  net-ssh: 
+    group: 
+    - :development
+    version: ">= 0"
   rcov: 
     group: 
     - :development
@@ -51,6 +55,10 @@ dependencies:
     - :development
     version: ~> 0.7.0
   rdiscount: 
+    group: 
+    - :development
+    version: ">= 0"
+  net-scp: 
     group: 
     - :development
     version: ">= 0"
@@ -108,6 +116,10 @@ specs:
     version: 0.2.10
 - fssm: 
     version: 0.1.4
+- net-ssh: 
+    version: 2.0.22
+- net-scp: 
+    version: 1.0.2
 - rails: 
     version: 2.3.5
 - rcov: 
@@ -118,7 +130,7 @@ specs:
     version: 1.3.0
 - yard: 
     version: 0.5.5
-hash: 6d09b39921f208f632dd9b677d37c76928ca66af
+hash: df487bccb250b5e020d67b3c74ff8be23d0a39ea
 sources: 
 - Git: 
     uri: git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git

@@ -17,6 +17,9 @@ group :development do
   # the jruby invocation uses the gems defined here, so it needs to be here.
   gem 'celerity', :require => nil
 
+  gem 'net-ssh'
+  gem 'net-scp'
+
   gem 'yard', '~> 0.5'
   gem 'rdiscount'
   gem 'fssm'
