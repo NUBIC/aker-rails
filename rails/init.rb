@@ -7,4 +7,10 @@ Bcsec.configure {
 }
 config.after_initialize do
   ApplicationController.send(:include, Bcsec::Rails::Application)
+
+  if !config.cache_classes
+    config.to_prepare do
+      ApplicationController.send(:include, Bcsec::Rails::Application)
+    end
+  end
 end
