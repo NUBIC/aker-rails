@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_bundler_dependencies
 
   s.require_path = 'lib'
-  s.files = Dir.glob("{CHANGELOG,README,VERSION,{lib,spec}/**/*}")
+  s.files = Dir.glob("{CHANGELOG,README,VERSION,{lib,spec,rails}/**/*}")
   s.authors = ["Rhett Sutphin", "Peter Nyberg"]
   s.email = "r-sutphin@northwestern.edu"
   s.homepage = "https://code.bioinformatics.northwestern.edu/redmine/projects/bcsec-ruby"
