@@ -11,6 +11,9 @@ group :development do
   gem 'bundler', '~> 0.9.25'
 
   gem 'rspec', '~> 1.3'
+
+  # cucumber ~> 0.7.0 requires gherkin ~> 1.0, but doesn't declare that dependency
+  gem 'gherkin', '~> 1.0'
   gem 'cucumber', '~> 0.7.0'
   gem 'culerity', '~> 0.2'
   # celerity is used by culerity under jruby.  When running with bundle exec,
