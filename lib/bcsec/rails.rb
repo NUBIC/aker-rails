@@ -6,6 +6,7 @@ module Bcsec
 
     autoload :Application,       'bcsec/rails/application'
     autoload :SecuredController, 'bcsec/rails/secured_controller'
+    autoload :Test,              'bcsec/rails/test'
   end
 
   # TODO: deprecate this somehow
