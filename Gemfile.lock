@@ -45,7 +45,7 @@ dependencies:
   bundler: 
     group: 
     - :development
-    version: ~> 0.9.25
+    version: = 0.9.26
   ci_reporter: 
     group: 
     - :development
@@ -130,7 +130,7 @@ specs:
     version: 1.3.0
 - yard: 
     version: 0.5.8
-hash: f30df43c1cbab0a2280498b188a9d27a12987fe3
+hash: 749176528566bcb5e434666e36be9f904dd38137
 sources: 
 - Git: 
     uri: git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git

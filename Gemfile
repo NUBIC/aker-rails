@@ -8,7 +8,9 @@ gem 'rails', '~> 2.3.5' # for now; 2.1 will support Rails 3
 
 group :development do
   gem 'rake', '~> 0.8'
-  gem 'bundler', '~> 0.9.25'
+
+  # Cucumber requires this.
+  gem 'bundler', '0.9.26'
 
   gem 'rspec', '~> 1.3'
 
