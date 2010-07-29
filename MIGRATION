@@ -9,8 +9,8 @@ Steps
 -----
 
 1.  Remove the old `bcsec` plugin.
-    
-        $ rm vendor/plugins/bcsec
+
+        $ rm -rf vendor/plugins/bcsec
         $ svn propedit svn:externals vendor/plugins # if using an external
 
 2.  Install the `bcsec-rails` gem per the {file:README}.
