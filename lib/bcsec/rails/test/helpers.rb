@@ -16,12 +16,17 @@ module Bcsec::Rails::Test::Helpers
   ##
   # Logs in a user.
   #
-  # User objects can be constructed by creating `Bcsec::User` instances, or by
-  # using the return value of
+  # Users can be identified by:
   #
-  #     Bcsec.authority.valid_credentials?(:user, username, password)
+  # * their username
+  # * building a `Bcsec::User` instance representing that user
+  # * the return value of
+  #   
+  #       Bcsec.authority.valid_credentials?(:user, username, password)
   #
-  # @param [Bcsec::User] user an object representing the user to log in
+  #   (which is a `Bcsec::User`)
+  #
+  # @param [String, Bcsec::User] user a user's username or `Bcsec::User` object
   def login_as(user)
     request.env.merge!(login_env(user))
   end
