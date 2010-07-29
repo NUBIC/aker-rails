@@ -21,7 +21,7 @@ module Bcsec::Rails::Test::Helpers
   # * their username
   # * building a `Bcsec::User` instance representing that user
   # * the return value of
-  #   
+  #
   #       Bcsec.authority.valid_credentials?(:user, username, password)
   #
   #   (which is a `Bcsec::User`)
