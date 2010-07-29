@@ -5,9 +5,6 @@ If you are upgrading a rails application which used Bcsec 1.x or
 earlier, this guide's for you.  You will also want to check out the
 {file:README}.
 
-This guide only covers the Bcsec-Rails-specific parts of the migration.  The
-general Bcsec parts are covered in its own `MIGRATION` doc.
-
 Steps
 -----
 
