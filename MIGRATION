@@ -15,6 +15,119 @@ Steps
 
 2.  Install the `bcsec-rails` gem per the {file:README}.
 
-3.  Run your application and/or integration tests and address any
-    deprecation warnings.  For more details, see bcsec's `MIGRATION`
-    docs.
+3.  Change all occurrences of
+
+        include Bcsec::SecuredController
+
+    to
+
+        include Bcsec::Rails::SecuredController
+
+4.  Remove all occurrences of
+
+        include Bcsec::CurrentUser
+
+5.  Ensure your test suite is up to date.  See the section "[Test harness
+    changes](#test_harness_changes)" for more information.
+
+6.  Run your application and/or integration tests and address any
+    deprecation warnings.  Examples of configuration updates are given in the
+    section "[Bcsec configuration changes by example](#configuration_changes)".
+
+<a name="test_harness_changes"></a>
+Test harness changes
+--------------------
+
+### `Bcsec.valid_credentials?` has been removed
+
+If your application's tests make use of `Bcsec.valid_credentials?` in
+combination with a static authority, then they will fail, because
+`Bcsec.valid_credentials?` no longer exists.  The fix is to change code that
+looks like this:
+
+    Bcsec.valid_credentials?(username, password)
+
+to this:
+
+    Bcsec.authority.valid_credentials?(:user, username, password)
+
+### The data format for `MockAuthenticator#load_credentials!` has changed
+
+If you used `MockAuthenticator#load_credentials!`, you need to adjust your
+user definition files from this:
+
+    admin:
+      groups: administrators
+      portals: AppPortal
+      password: admin
+
+to this:
+
+    users:
+      admin:
+        portals:
+          - AppPortal:
+            - administrators
+        password: admin
+
+    groups:
+      - AppPortal:
+        - administrators
+
+More information is available in the documentation for
+`Bcsec::Authorities::Static`.
+
+### `session[:bcsec_user]` no longer exists
+
+Bcsec user data is now stored in the Rack environment. Change code that looks
+like this:
+
+    session[:bcsec_user] = user
+
+to this:
+
+    request.env['bcsec'] = Bcsec::Rack::Facade.new(Bcsec.configuration, user)
+
+<a name="configuration_changes"></a>
+Bcsec configuration changes by example
+--------------------------------------
+
+### A production environment
+
+#### Bcsec 1.6
+
+    Bcsec.configure do
+      authenticators :pers, :netid
+      central '/etc/nubic/bcsec-prod.yml'
+      establish_cc_pers_connection
+      use_cas
+    end
+
+#### Bcsec 2.0
+
+    Bcsec.configure do
+      ui_mode :cas
+      api_mode :cas_proxy
+      authorities :cas, :pers, :netid
+      central '/etc/nubic/bcsec-prod.yml'
+    end
+
+### A test environment
+
+#### Bcsec 1.6
+
+    Bcsec.configure do
+      mock = Bcsec::MockAuthenticator.new
+      login_config = File.join(RAILS_ROOT, %w(config logins test.yml))
+
+      mock.load_credentials!(File.open(login_config))
+      authenticator mock
+    end
+
+#### Bcsec 2.0
+
+    Bcsec.configure do
+      login_config = File.join(RAILS_ROOT, %w(config logins test.yml))
+
+      authority Bcsec::Authorities::Static.from_file(login_config)
+    end
