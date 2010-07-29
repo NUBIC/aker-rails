@@ -7,6 +7,10 @@ thin wrapper around Bcsec's rack support.
 Setup
 -----
 
+### Prerequisites
+
+`bcsec-rails` requires Rails ~> 2.3.5.
+
 ### Get the gem
 
 `bcsec-rails` is a gem plugin.  In order to use it, either install the
