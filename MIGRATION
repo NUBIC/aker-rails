@@ -51,6 +51,17 @@ to this:
 
     Bcsec.authority.valid_credentials?(:user, username, password)
 
+### `session[:bcsec_user]` no longer exists
+
+Bcsec user data is now stored in the Rack environment.  Remove all instances of
+`session[:bcsec_user]` and change code that logs in users to this:
+
+    # in an rspec config block, test helper, etc:
+    include Bcsec::Rails::Test::Helpers
+
+    # where you used to have session[:bcsec_user] = user:
+    login_as(user)
+
 ### The data format for `MockAuthenticator#load_credentials!` has changed
 
 If you used `MockAuthenticator#load_credentials!`, you need to adjust your
@@ -76,17 +87,6 @@ to this:
 
 More information is available in the documentation for
 `Bcsec::Authorities::Static`.
-
-### `session[:bcsec_user]` no longer exists
-
-Bcsec user data is now stored in the Rack environment. Change code that looks
-like this:
-
-    session[:bcsec_user] = user
-
-to this:
-
-    request.env['bcsec'] = Bcsec::Rack::Facade.new(Bcsec.configuration, user)
 
 <a name="configuration_changes"></a>
 Bcsec configuration changes by example
