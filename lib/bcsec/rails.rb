@@ -4,6 +4,8 @@ module Bcsec
   ##
   # Rails integration for bcsec.  In general, it is a thin wrapper
   # around bcsec's rack integration.
+  #
+  # Everything in this module is in the `bcsec-rails` gem plugin.
   module Rails
     autoload :VERSION, 'bcsec/rails/version'
 
