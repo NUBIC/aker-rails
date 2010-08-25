@@ -37,7 +37,7 @@ module Bcsec::Rails
     # Aids group-level authorization.  It is safe to call this method
     # without checking that there is a logged in user first.
     #
-    # This method delegates directly to `Bcsec::Rack::Facade#permit?`;
+    # This method delegates directly to {Bcsec::Rack::Facade#permit?};
     # see the documentation for that method for more information.
     #
     # This method is also available to views (i.e., it is a helper).

@@ -1,6 +1,9 @@
 require 'bcsec'
 
 module Bcsec
+  ##
+  # Rails integration for bcsec.  In general, it is a thin wrapper
+  # around bcsec's rack integration.
   module Rails
     autoload :VERSION, 'bcsec/rails/version'
 

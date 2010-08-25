@@ -27,7 +27,7 @@ module Bcsec::Rails
     # The filter which actually forces any user accessing a controller
     # which mixes this in to be authenticated.
     #
-    # It delegates to `Bcsec::Rack::Facade#authentication_required!`;
+    # It delegates to {Bcsec::Rack::Facade#authentication_required!};
     # see that method's documentation for more information.
     #
     # @return [void]
@@ -45,7 +45,7 @@ module Bcsec::Rails
       # Tags a controller as requiring that a user both be
       # authenticated and belong to one of a set of groups.
       #
-      # It delegates to `Bcsec::Rack::Facade#permit!`; see that
+      # It delegates to {Bcsec::Rack::Facade#permit!}; see that
       # methods's documentation for more information.
       #
       # @return [void]
@@ -65,8 +65,6 @@ module Bcsec::Rails
   end
 end
 
-##
-# @private documented in main gem
 module Bcsec
   class << self
     alias :prerails_const_missing :const_missing
