@@ -63,12 +63,16 @@ module Bcsec::Rails
         FileUtils.cd APP_BASE do
           clean_rubyopt = (ENV['RUBYOPT'] || '').split(' ').reject { |o| o =~ /bundler/ }.join(' ')
           bundle_env="BUNDLE_GEMFILE=\"#{APP_BASE}/Gemfile\" RUBYOPT=\"#{clean_rubyopt}\""
-          system("#{bundle_env} bundle check > /dev/null")
-          unless $? == 0 || in_ci?
+          should_install = in_ci? ||
+            begin
+              system("#{bundle_env} bundle check > /dev/null")
+              $? != 0
+            end
+          if should_install
             # don't lock unless bundler-327 is fixed
             system("#{bundle_env} bundle install")
+            fail "Test application bundle install failed" unless $? == 0
           end
-          fail "Test application bundle lock failed" unless $? == 0
           system("#{bundle_env} script/server -p #{APP_PORT} -d")
           fail "Server startup from #{APP_BASE} failed" unless $? == 0
         end
