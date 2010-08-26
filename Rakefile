@@ -8,6 +8,8 @@ require 'rake/gempackagetask'
 require 'spec/rake/spectask'
 require 'cucumber/rake/task'
 require 'yard'
+require 'net/ssh'
+require 'net/scp'
 
 require 'ci/reporter/rake/rspec'
 
@@ -113,6 +115,53 @@ desc "Uninstall the current development gem (if any)"
 task :uninstall do
   puts "Removing existing #{gemspec.name}-#{gemspec.version}, if any"
   puts `gem uninstall #{gemspec.name} --version '=#{gemspec.version}'`
+end
+
+desc "Deploy to the internal gem server"
+task :deploy => :"deploy:gem"
+
+def trace?
+  Rake.application.options.trace
+end
+
+def one_ssh_cmd(ssh, cmd)
+  $stderr.puts "\n-> #{cmd}" if trace?
+  ssh.exec(cmd)
+  ssh.loop
+end
+
+namespace :deploy do
+  task :check do
+    if Bcsec::Rails::VERSION.split('.').any? { |v| v =~ /\D/i }
+      puts "#{Bcsec::Rails::VERSION} is a prerelease version.  " <<
+        "Are you sure you want to deploy?\n" <<
+        "Press ^C to abort or enter to continue deploying."
+      STDIN.readline
+    end
+  end
+
+  task :gem => [:check, :repackage] do
+    server = "ligand"
+    user = ENV["BC_USER"] or raise "Please set BC_USER=your_netid in the environment"
+    target = File.basename(GEM_FILE)
+    Net::SSH.start(server, user) do |ssh|
+      puts "-> Uploading #{GEM_FILE}"
+      channel = ssh.scp.upload(GEM_FILE, "/home/#{user}") do |ch, name, sent, total|
+        puts sent == total ? "  complete" : "  #{sent}/#{total}"
+      end
+      channel.wait
+
+      one_ssh_cmd(ssh, "deploy-gem #{target}")
+    end
+  end
+
+  desc "Tag the final version of a release"
+  task :tag => [:check] do
+    tagname = Bcsec::Rails::VERSION
+    system("git tag -a #{tagname} -m 'Bcsec-Rails #{Bcsec::Rails::VERSION}'")
+    fail "Tagging failed" unless $? == 0
+    system("git push origin : #{tagname}")
+  end
 end
 
 namespace :ci do
