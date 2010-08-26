@@ -2,7 +2,7 @@ source :rubygems
 
 # This is deliberately open -- I expect that this rails plugin will
 # change much less frequently than the library.
-gem 'bcsec', '>= 2.0.0.pre', :git => 'git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git'
+gem 'bcsec', '>= 2.0.0.rc', :git => 'git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git'
 
 gem 'rails', '~> 2.3.5' # for now; 2.1 will support Rails 3
 
