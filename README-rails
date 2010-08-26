@@ -60,7 +60,7 @@ end of `config/environment.rb` it won't work.)
     end
 
 For more information on the configuration syntax and options, see the
-bcsec API documentation for `Bcsec::Configuration`.
+bcsec API documentation for {Bcsec::Configuration}.
 
 ### Add per-environment configurations
 
@@ -74,7 +74,7 @@ line will be env-specific.
     # In config/environments/production.rb, for example
     config.after_initialize do
       Bcsec.configure do
-        # The authorities to use.  See the bcsec API documentation 
+        # The authorities to use.  See the bcsec API documentation
         # for `Bcsec::Authorities` for options.
         authorities :netid, :pers
 
@@ -96,7 +96,7 @@ configuration.
 ### Securing pages
 
 In any controller which authentication is required, include
-`Bcsec::Rails::SecuredController`.  If authentication is required for
+{Bcsec::Rails::SecuredController}.  If authentication is required for
 all controllers, you can include this module in
 `ApplicationController`.
 
@@ -137,9 +137,10 @@ content for a logged-in user.
 
 ### The current user
 
-Bcsec provides a method `current_user` to all controllers and views.
-It will return a `Bcsec::User` object for the current user, or `nil`
-if there isn't one.
+Bcsec provides a method {Bcsec::Rails::Application#current_user
+current_user} to all controllers and views.  It will return a
+{Bcsec::User} object for the current user, or `nil` if there isn't
+one.
 
 ### Overriding the unauthorized view
 
