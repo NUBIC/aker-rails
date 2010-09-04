@@ -17,7 +17,7 @@ echo ". ~/.rvm/scripts/rvm"
 set -x
 
 BCSEC_JRUBY='jruby-1.4.0'
-BCSEC_RVM_RUBY='ree-1.8.7-2010.01'
+BCSEC_RVM_RUBY='ree-1.8.7-2010.02'
 CELERITY_VERSION="0.7.9"
 
 echo "Adding jruby to the PATH for culerity"
@@ -35,7 +35,11 @@ ln -s ~/.rvm/bin/${BCSEC_JRUBY} ci_bin/jruby
 PATH="ci_bin:$PATH"
 
 echo "Switching to ${BCSEC_RVM_RUBY}"
-set +x
+set +xe
 rvm use "$BCSEC_RVM_RUBY"
-set -x
+if [ $? -ne 0 ]; then
+    echo "Switch failed"
+    exit 2;
+fi
+set -xe
 ruby -v
