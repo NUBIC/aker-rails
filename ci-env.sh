@@ -41,5 +41,7 @@ if [ $? -ne 0 ]; then
     echo "Switch failed"
     exit 2;
 fi
+echo "Switching to bcsec-rails gemset"
+rvm gemset use bcsec-rails
 set -xe
 ruby -v
