@@ -78,7 +78,7 @@ specs:
 - activeresource: 
     version: 2.3.10
 - bcaudit: 
-    version: 0.0.1
+    version: 0.0.2
 - highline: 
     version: 1.6.1
 - bcdatabase: 
@@ -141,7 +141,7 @@ sources:
 - Git: 
     uri: git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git
     git: git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git
-    ref: 4d7676dbbb4c3bc753b5e8670bf52df0d826ddf2
+    ref: 5fe93754af14456fe92dc81416616cd1a6b03dad
 - Rubygems: 
     uri: http://gemcutter.org
 - Rubygems: 
