@@ -1,17 +1,13 @@
 source :rubygems
 source "http://download.bioinformatics.northwestern.edu/gems/"
 
-# This is deliberately open -- I expect that this rails plugin will
-# change much less frequently than the library.
-gem 'bcsec', '>= 2.0.0', :git => 'git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git'
-
-gem 'rails', '~> 2.3.5' # for now; 2.1 will support Rails 3
+gemspec
 
 group :development do
   gem 'rake', '~> 0.8'
 
   # Cucumber requires this.
-  gem 'bundler', '0.9.26'
+#  gem 'bundler', '0.9.26'
 
   gem 'rspec', '~> 1.3'
 

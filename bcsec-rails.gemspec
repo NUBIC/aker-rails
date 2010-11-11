@@ -4,24 +4,21 @@ $:.unshift lib unless $:.include?(lib)
 
 require 'bcsec/rails/version'
 
-require 'rubygems'
-begin
-  require 'bundler'
-rescue LoadError
-  fail "Evaluating this gemspec requires bundler.  Install it and then try again."
-end
-
 Gem::Specification.new do |s|
   s.name = 'bcsec-rails'
   s.version = Bcsec::Rails::VERSION
   s.platform = Gem::Platform::RUBY
   s.summary = "Bioinformatics core security infrastructure plugin for rails"
 
-  s.add_bundler_dependencies
-
   s.require_path = 'lib'
   s.files = Dir.glob("{CHANGELOG,README,VERSION,{lib,spec,rails}/**/*}")
   s.authors = ["Rhett Sutphin", "Peter Nyberg"]
   s.email = "r-sutphin@northwestern.edu"
   s.homepage = "https://code.bioinformatics.northwestern.edu/redmine/projects/bcsec-ruby"
+
+  s.add_runtime_dependency "rails", "~> 2.3.5" # for now; 2.1 will support Rails 3
+
+  # This is deliberately open -- I expect that this rails plugin will
+  # change much less frequently than the library.
+  s.add_runtime_dependency "bcsec", ">= 2.0.0"
 end
