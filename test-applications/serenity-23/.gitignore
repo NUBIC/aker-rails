@@ -1,2 +1,5 @@
 log/*
 tmp/*
+
+# Wouldn't normally do this, but this app is for testing.
+Gemfile.lock

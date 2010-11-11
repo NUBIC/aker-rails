@@ -37,7 +37,6 @@ GEM
       schema_qualified_tables (~> 1.0)
       warden (~> 0.10.3)
     builder (2.1.2)
-    celerity (0.8.2)
     ci_reporter (1.6.3)
       builder (>= 2.1.2)
     composite_primary_keys (2.3.5.1)
@@ -88,7 +87,6 @@ PLATFORMS
 DEPENDENCIES
   bcsec (>= 2.0.0)
   bcsec-rails!
-  celerity
   ci_reporter (~> 1.6)
   cucumber (~> 0.8.0)
   culerity (~> 0.2)

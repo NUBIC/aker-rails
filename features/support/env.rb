@@ -28,6 +28,9 @@ module Bcsec::Rails
       def self.browser
         @browser ||=
           begin
+            # Remove the `bundle exec` environment from the culerity invocation
+            Culerity.jruby_invocation = "RUBYOPT=\"#{clean_rubyopt}\" jruby"
+
             browser = Culerity::RemoteBrowserProxy.new(culerity_server,
                                                        :browser => :firefox3,
                                                        :javascript_exceptions => true,
@@ -55,13 +58,16 @@ module Bcsec::Rails
         start_app
       end
 
+      def self.clean_rubyopt
+        (ENV['RUBYOPT'] || '').split(' ').reject { |o| o =~ /bundler/ }.join(' ')
+      end
+
       def self.in_ci?
         ENV['BUILD_ID']
       end
 
       def self.start_app
         FileUtils.cd APP_BASE do
-          clean_rubyopt = (ENV['RUBYOPT'] || '').split(' ').reject { |o| o =~ /bundler/ }.join(' ')
           bundle_env="BUNDLE_GEMFILE=\"#{APP_BASE}/Gemfile\" RUBYOPT=\"#{clean_rubyopt}\""
           should_install = in_ci? ||
             begin
@@ -69,8 +75,7 @@ module Bcsec::Rails
               $? != 0
             end
           if should_install
-            # don't lock unless bundler-327 is fixed
-            system("#{bundle_env} bundle install")
+            system("#{bundle_env} bundle update")
             fail "Test application bundle install failed" unless $? == 0
           end
           system("#{bundle_env} script/server -p #{APP_PORT} -d")
