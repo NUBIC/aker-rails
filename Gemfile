@@ -1,4 +1,5 @@
 source :rubygems
+source "http://download.bioinformatics.northwestern.edu/gems/"
 
 # This is deliberately open -- I expect that this rails plugin will
 # change much less frequently than the library.
