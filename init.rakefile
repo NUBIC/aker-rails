@@ -10,7 +10,7 @@ end
 namespace :bundle do
   desc "Install the bundled gems into the local system gem repo"
   task :expand => :ensure_bundler_available do
-    system("bundle _#{BUNDLER_VERSION}_ install")
+    system("bundle _#{BUNDLER_VERSION}_ update")
     fail "bundler failed; is it on the path?" unless $? == 0
   end
 
