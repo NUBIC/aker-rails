@@ -8,7 +8,7 @@ group :development do
 
   gem 'rspec', '~> 1.3'
 
-  gem 'cucumber', '~> 0.8.0'
+  gem 'cucumber', '~> 0.9.0'
   gem 'culerity', '~> 0.2'
 
   gem 'net-ssh'
