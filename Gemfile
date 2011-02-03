@@ -3,6 +3,8 @@ source "http://download.bioinformatics.northwestern.edu/gems/"
 
 gemspec
 
+gem 'bcsec', :git => 'git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git'
+
 group :development do
   gem 'rake', '~> 0.8'
 
