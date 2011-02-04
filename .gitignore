@@ -8,3 +8,5 @@ ci_bin
 
 doc
 .yardoc
+
+*.sw?
