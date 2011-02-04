@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.email = "r-sutphin@northwestern.edu"
   s.homepage = "https://code.bioinformatics.northwestern.edu/redmine/projects/bcsec-ruby"
 
-  s.add_runtime_dependency "rails", "~> 2.3.5" # for now; 2.1 will support Rails 3
+  s.add_runtime_dependency "rails", "~> 3.0"
 
   # This is deliberately open -- I expect that this rails plugin will
   # change much less frequently than the library.
