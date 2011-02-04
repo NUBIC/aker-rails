@@ -16,7 +16,7 @@ module Bcsec::Rails
     class World
       include Spec::Matchers
 
-      APP_BASE = File.expand_path("../../../test-applications/serenity-23", __FILE__)
+      APP_BASE = File.expand_path("../../../test-applications/serenity-30", __FILE__)
       APP_PORT = 3636
 
       def self.culerity_server
