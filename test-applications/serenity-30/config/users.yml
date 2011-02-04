@@ -1,0 +1,12 @@
+users:
+  mr296:
+    password: br0wn
+    portals:
+      - Serenity:
+        - Command
+        - Owners
+  zaw102:
+    password: saw
+    portals:
+      - Serenity:
+        - Command
