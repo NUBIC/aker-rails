@@ -13,5 +13,11 @@ module Bcsec::Rails
 
       Bcsec::Rack.use_in(app.middleware)
     end
+
+    initializer 'Bcsec::Rails development support' do |app|
+      app.config.to_prepare do
+        ApplicationController.send(:include, Bcsec::Rails::Application)
+      end
+    end
   end
 end
