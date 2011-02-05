@@ -1,6 +1,6 @@
 require File.expand_path("../../../../spec_helper", __FILE__)
 require 'action_controller'
-require 'action_controller/test_process'
+require 'action_controller/test_case'
 
 module Bcsec::Rails::Test
   describe Helpers do
