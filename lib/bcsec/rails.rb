@@ -10,6 +10,7 @@ module Bcsec
     autoload :VERSION, 'bcsec/rails/version'
 
     autoload :Application,       'bcsec/rails/application'
+    autoload :Railtie,           'bcsec/rails/railtie'
     autoload :SecuredController, 'bcsec/rails/secured_controller'
     autoload :Test,              'bcsec/rails/test'
   end
