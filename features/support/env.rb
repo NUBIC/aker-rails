@@ -78,7 +78,7 @@ module Bcsec::Rails
             system("#{bundle_env} bundle update")
             fail "Test application bundle install failed" unless $? == 0
           end
-          system("#{bundle_env} script/server -p #{APP_PORT} -d")
+          system("#{bundle_env} script/rails server -p #{APP_PORT} -d")
           fail "Server startup from #{APP_BASE} failed" unless $? == 0
         end
 
