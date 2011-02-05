@@ -2,6 +2,6 @@ source 'http://rubygems.org'
 
 plugin_root = File.expand_path("../../..", __FILE__)
 
-gem 'rails', '~> 3.0'
 gem 'bcsec', :git => 'git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git'
 gem 'bcsec-rails', :path => plugin_root
+gem 'rails', '~> 3.0'
