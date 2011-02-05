@@ -17,7 +17,6 @@ module Bcsec::Rails
     #
     # @return [void]
     def self.included(controller_class)
-      Bcsec::Rack.use_in(ActionController::Dispatcher.middleware)
       controller_class.class_eval do
         helper_method :current_user, :permit?, :permit
       end
