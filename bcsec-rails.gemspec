@@ -20,5 +20,5 @@ Gem::Specification.new do |s|
 
   # This is deliberately open -- I expect that this rails plugin will
   # change much less frequently than the library.
-  s.add_runtime_dependency "bcsec", ">= 2.1.0"
+  s.add_runtime_dependency "bcsec", "2.1.0.pre"
 end
