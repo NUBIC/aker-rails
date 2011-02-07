@@ -1,7 +1,7 @@
 Bcsec-Rails
 ===========
 
-`bcsec-rails` is the Rails plugin for Bcsec 2.0 and later.  It is a
+`bcsec-rails` is the Rails plugin for Bcsec 2.1 and later.  It is a
 thin wrapper around Bcsec's rack support.
 
 Setup
@@ -9,41 +9,26 @@ Setup
 
 ### Prerequisites
 
-`bcsec-rails` requires Rails ~> 2.3.5.
+`bcsec-rails` requires Rails ~> 3.0.
 
 ### Get the gem
 
-`bcsec-rails` is a gem plugin.  In order to use it, either install the
-gem at the system level or (better) include it in your bundler-using
-application's Gemfile.
+`bcsec-rails` is a gem plugin.  In order to use it, include it in your
+application's Gemfile:
 
-#### Okay
-
-    !!!plain
-    $ gem sources -a http://download.bioinformatics.northwestern.edu/gems
-    $ gem install bcsec-rails
-
-#### Better
-
-    # in your Gemfile
     source 'http://download.bioinformatics.northwestern.edu/gems'
-    gem 'bcsec-rails', '~> 2.0'
 
-### Add it to the application
+    gem 'bcsec-rails'
 
-Next, configure the gem into your Rails application's environment.
-(This is necessary for gem plugins even if you are using bundler.)
-
-    # In config/environment.rb's initializer block
-    config.gem "bcsec-rails", :lib => 'bcsec/rails', :version => '~> 2.0'
+Between this and the `Bundler.require` that most Rails 3 applications do
+as part of their initialization process, that's all you usually need to
+do to get bcsec and bcsec-rails loaded in your Rails application.
 
 ### Add an initializer for bcsec
 
 Put your global configuration in an initializer. By _global
 configuration_ I mean the parts that are the same no matter which
-environment you are using, like the portal name and the modes.  (N.b.:
-You have to put it in an initializer &mdash; if you just put it at the
-end of `config/environment.rb` it won't work.)
+environment you are using, like the portal name and the modes.
 
     # In config/initializers/bcsec.rb
     Bcsec.configure do
@@ -104,7 +89,7 @@ If you want to further require that all actions in a controller
 require that the user be a member of a certain group, you can use the
 {Bcsec::Rails::SecuredController::ClassMethods#permit permit} method:
 
-    class ManuscriptController < ActionController::Base
+    class ManuscriptController < ApplicationController
       include Bcsec::Rails::SecuredController
       permit :editor
     end
@@ -116,7 +101,7 @@ particular group or groups.  The helper for this is also called
 {Bcsec::Rails::Application#permit? permit}:
 
     # In a controller action
-    class DashboardController < ActionController::Base
+    class DashboardController < ApplicationController
       # ...
       def index
         if permit?(:editor)
@@ -130,10 +115,11 @@ particular group or groups.  The helper for this is also called
        @manuscripts.collect { |m| m.title }.join(', ')
     <% end %>
 
-This permit helper is available to all controllers and views, not just
-ones that mix in {Bcsec::Rails::SecuredController}.  This means you
-can have a publically-accessible page which has additional/different
-content for a logged-in user.
+This permit helper is available to all subclasses of
+`ApplicationController`, not just ones that mix in
+{Bcsec::Rails::SecuredController}.  This means you can have a
+publically-accessible page which has additional/different content for a
+logged-in user.
 
 ### The current user
 
