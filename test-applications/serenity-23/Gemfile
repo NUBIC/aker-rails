@@ -1,3 +1,0 @@
-plugin_root = File.expand_path("../../..", __FILE__)
-
-gem 'bcsec-rails', :path => plugin_root
