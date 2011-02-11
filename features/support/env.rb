@@ -17,7 +17,7 @@ module Bcsec::Rails
       include Spec::Matchers
 
       APP_BASE = File.expand_path("../../../test-applications/serenity-30", __FILE__)
-      APP_PORT = 3636
+      APP_PORT = 6363
 
       def self.culerity_server
         @culerity_server ||= Culerity.run_server
