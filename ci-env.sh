@@ -1,15 +1,17 @@
 ######
 # This is not an executable script.  It selects and configures rvm for
-# bcsec's CI process based on the BCSEC_ENV environment variable.
+# bcsec-rails' CI process.
 #
 # Use it by sourcing it:
 #
 #  . ci-rvm.sh
 #
-# Assumes that the create-on-use settings are set in your ~/.rvmrc:
+# This script assumes:
 #
-#  rvm_install_on_use_flag=1
-#  rvm_gemset_create_on_use_flag=1
+# 1. the existence of JOB_NAME in the parent environment
+# 2. RVM's create-on-use settings are set in your ~/.rvmrc:
+#        rvm_install_on_use_flag=1
+#        rvm_gemset_create_on_use_flag=1
 
 set +x
 echo ". ~/.rvm/scripts/rvm"
@@ -20,6 +22,7 @@ BCSEC_JRUBY='jruby-1.4.0'
 BCSEC_RVM_RUBY='ree-1.8.7-2010.02'
 CELERITY_VERSION="0.7.9"
 CULERITY_VERSION="0.2.12"
+GEMSET="bcsec-rails-${JOB_NAME}"
 
 echo "Adding jruby to the PATH for culerity"
 set +xe
@@ -47,7 +50,7 @@ if [ $? -ne 0 ]; then
     echo "Switch failed"
     exit 2;
 fi
-echo "Switching to bcsec-rails gemset"
-rvm gemset use bcsec-rails
+echo "Switching to $GEMSET gemset"
+rvm gemset use $GEMSET
 set -xe
 ruby -v
