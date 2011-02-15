@@ -4,6 +4,17 @@ Bcsec-Rails History
 2.0.1
 -----
 
+### Fixed
+
+- The bcsec middleware is no longer appended to the stack multiple
+  times when class reloading is active. (#4486)
+
+### Development
+
+- Use bundler 1.0. (#3930)
+- CI builds use most-recent-available gems for all dependencies,
+  including prerelease versions of bcsec. (#4422, #4427)
+
 2.0.0
 -----
 
