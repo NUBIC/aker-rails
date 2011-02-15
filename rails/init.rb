@@ -6,9 +6,11 @@ Bcsec.configure {
   logger Rails.logger
 }
 config.after_initialize do
-  ApplicationController.send(:include, Bcsec::Rails::Application)
+  Bcsec::Rails::Application.one_time_setup
 
-  if !config.cache_classes
+  if config.cache_classes
+    ApplicationController.send(:include, Bcsec::Rails::Application)
+  else
     config.to_prepare do
       ApplicationController.send(:include, Bcsec::Rails::Application)
     end

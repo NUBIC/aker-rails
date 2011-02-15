@@ -38,10 +38,6 @@ module Bcsec::Rails
       @controller.class.helper_methods.should include(:current_user)
     end
 
-    it "adds the bcsec middleware to the action controller middleware stack" do
-      ActionController::Dispatcher.middleware.should include(Bcsec::Rack::Setup)
-    end
-
     describe "#permit?" do
       it "delegates to the bcsec rack facade" do
         @bcsec.should_receive(:permit?).with(:bar, :quux)
@@ -70,6 +66,22 @@ module Bcsec::Rails
           @controller.class.helper_methods.should include(:permit)
         end
       end
+    end
+  end
+
+  describe Application, ".one_time_setup" do
+    before do
+      Bcsec.configure { }
+
+      Application.one_time_setup
+    end
+
+    after do
+      Bcsec.configuration = nil
+    end
+
+    it "adds the bcsec middleware to the action controller middleware stack" do
+      ActionController::Dispatcher.middleware.should include(Bcsec::Rack::Setup)
     end
   end
 end

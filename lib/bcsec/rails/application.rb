@@ -17,10 +17,18 @@ module Bcsec::Rails
     #
     # @return [void]
     def self.included(controller_class)
-      Bcsec::Rack.use_in(ActionController::Dispatcher.middleware)
       controller_class.class_eval do
         helper_method :current_user, :permit?, :permit
       end
+    end
+
+    ##
+    # Sets up the bcsec global infrastructure that is not affected by
+    # Rails' development-mode class reloading.
+    #
+    # @return [void]
+    def self.one_time_setup
+      Bcsec::Rack.use_in(ActionController::Dispatcher.middleware)
     end
 
     ##
