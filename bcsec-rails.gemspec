@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.require_path = 'lib'
   s.files = Dir.glob("{CHANGELOG,README,VERSION,{lib,spec,rails}/**/*}")
-  s.authors = ["Rhett Sutphin", "Peter Nyberg"]
+  s.authors = ["David Yip", "Rhett Sutphin", "Peter Nyberg"]
   s.email = "r-sutphin@northwestern.edu"
   s.homepage = "https://code.bioinformatics.northwestern.edu/redmine/projects/bcsec-ruby"
 
@@ -20,5 +20,5 @@ Gem::Specification.new do |s|
 
   # This is deliberately open -- I expect that this rails plugin will
   # change much less frequently than the library.
-  s.add_runtime_dependency "bcsec", "2.1.0.pre"
+  s.add_runtime_dependency "bcsec", ">= 2.1.0"
 end
