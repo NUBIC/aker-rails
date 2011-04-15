@@ -11,8 +11,7 @@ Given /^I am logged in as (\w+)$/ do |username|
     end
 
   get '/login'
-  page.uri.path.should == '/login'
-  page.code.should == '200'
+  Then 'I am on the login page'
 
   login_form = page.form_with(:action => '/login')
   login_form.field_with(:name => 'username').value = username
@@ -23,6 +22,7 @@ end
 
 Then /^I am on the login page/ do
   page.uri.path.should == '/login'
+  page.code.should == '200'
 end
 
 When /^I access (?:an?|the) (\S+) page$/ do |page_name|
