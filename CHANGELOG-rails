@@ -1,6 +1,14 @@
 Bcsec-Rails History
 ===================
 
+3.0.1
+-----
+
+### Development
+
+- Switch integration test suite from Celerity to Mechanize. (#3931)
+  This eliminates the JRuby dependency for integration testing.
+
 3.0.0
 -----
 
