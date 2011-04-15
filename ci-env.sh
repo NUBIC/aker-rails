@@ -18,30 +18,8 @@ echo ". ~/.rvm/scripts/rvm"
 . ~/.rvm/scripts/rvm
 set -x
 
-BCSEC_JRUBY='jruby-1.4.0'
 BCSEC_RVM_RUBY='ree-1.8.7-2010.02'
-CELERITY_VERSION="0.7.9"
-CULERITY_VERSION="0.2.12"
 GEMSET="bcsec-rails-${JOB_NAME}"
-
-echo "Adding jruby to the PATH for culerity"
-set +xe
-rvm use "${BCSEC_JRUBY}" # ensure it is installed
-set -x
-if [ $(gem list -i celerity -v $CELERITY_VERSION) == 'false' ]; then
-  gem install celerity -v $CELERITY_VERSION
-fi
-if [ $(gem list -i culerity -v $CULERITY_VERSION) == 'false' ]; then
-  gem install culerity -v $CULERITY_VERSION
-fi
-set -e
-
-mkdir -p ci_bin
-if [ -L ci_bin/jruby ]; then
-  rm ci_bin/jruby
-fi
-ln -s ~/.rvm/bin/${BCSEC_JRUBY} ci_bin/jruby
-PATH="ci_bin:$PATH"
 
 echo "Switching to ${BCSEC_RVM_RUBY}"
 set +xe
