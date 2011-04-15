@@ -83,7 +83,7 @@ module Bcsec::Rails
       end
 
       def tmpdir
-        @tmpdir ||= "/tmp/bcsec-rails-integrated-tests"
+        @tmpdir ||= "/tmp/bcsec-rails-rails2-integrated-tests"
         unless File.exist?(@tmpdir)
           mkdir_p @tmpdir
           puts "Using tmpdir #{@tmpdir}"
