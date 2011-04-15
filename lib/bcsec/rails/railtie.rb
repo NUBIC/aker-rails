@@ -12,6 +12,8 @@ module Bcsec::Rails
       end
 
       Bcsec::Rack.use_in(app.middleware)
+
+      Rack::Request.send(:include, Bcsec::Rack::RequestExtensions)
     end
 
     initializer 'Bcsec::Rails development support' do |app|
