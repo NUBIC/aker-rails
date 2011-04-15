@@ -1,8 +1,10 @@
 require 'spec'
+require 'fileutils'
+require 'mechanize'
 require 'cucumber/formatter/unicode'
-require 'culerity'
-
 require 'uri'
+
+require File.expand_path('../mechanize_test', __FILE__)
 
 # Note: there is additional boot-time configuration after the world
 # definition
@@ -10,48 +12,23 @@ require 'uri'
 module Bcsec::Rails
   module Cucumber
     class World
+      include Bcsec::Rails::Cucumber::MechanizeTest
+      include FileUtils
       include Spec::Matchers
 
       APP_BASE = File.expand_path("../../../test-applications/serenity-23", __FILE__)
       APP_PORT = 3636
 
-      def self.culerity_server
-        @culerity_server ||= Culerity.run_server
-      end
-
-      ##
-      # Provides the culerity/celerity browser proxy
-      def self.browser
-        @browser ||=
-          begin
-            # Remove the `bundle exec` environment from the culerity invocation
-            Culerity.jruby_invocation = "RUBYOPT=\"#{clean_rubyopt}\" jruby"
-
-            browser = Culerity::RemoteBrowserProxy.new(culerity_server,
-                                                       :browser => :firefox3,
-                                                       :javascript_exceptions => true,
-                                                       :resynchronize => true,
-                                                       :status_code_exceptions => false)
-            browser.log_level = :warning
-            browser.webclient.addRequestHeader("Accept", "text/html")
-            browser
-          end
-      end
-
-      def browser
-        self.class.browser
-      end
-
-      def visit(url)
-        browser.goto URI.join(self.class.base_uri, url).to_s
-      end
-
       def self.base_uri
-        "http://localhost:#{APP_PORT}"
+        "http://localhost:#{APP_PORT}/"
       end
 
       def self.start
         start_app
+      end
+
+      def self.stop
+        stop_app
       end
 
       def self.clean_rubyopt
@@ -101,22 +78,20 @@ module Bcsec::Rails
         end
       end
 
-      def self.stop_culerity
-        @browser.exit if @browser
-        @culerity_server.close if @culerity_server
+      def app_url(path)
+        URI.join(self.class.base_uri, path).to_s
       end
 
-      def self.stop
-        stop_app
-        stop_culerity
+      def tmpdir
+        @tmpdir ||= "/tmp/bcsec-rails-integrated-tests"
+        unless File.exist?(@tmpdir)
+          mkdir_p @tmpdir
+          puts "Using tmpdir #{@tmpdir}"
+        end
+        @tmpdir
       end
     end
   end
-end
-
-After do
-  self.class.culerity_server.clear_proxies
-  browser.clear_cookies
 end
 
 World do
