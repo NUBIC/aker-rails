@@ -1,4 +1,3 @@
-@wip
 Feature: Interactivity testing
   Scenario: Interactive requests are deemed interactive
     When I am using the user interface
