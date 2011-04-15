@@ -1,7 +1,3 @@
-require 'rubygems'
-require 'bundler'
-Bundler.setup
-
 require "spec"
 
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
