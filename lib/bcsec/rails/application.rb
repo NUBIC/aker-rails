@@ -29,7 +29,7 @@ module Bcsec::Rails
     # @return [void]
     def self.one_time_setup
       Bcsec::Rack.use_in(ActionController::Dispatcher.middleware)
-      Rack::Request.send(:include, Bcsec::Rack::RequestExtensions)
+      Rack::Request.send(:include, Bcsec::Rack::RequestExt)
     end
 
     ##
