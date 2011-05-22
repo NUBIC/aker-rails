@@ -5,6 +5,10 @@ gemspec
 
 gem 'bcsec', :git => 'git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git'
 
+group :resolver_hacks do
+  gem 'builder', '~> 2.1.2'
+end
+
 group :development do
   gem 'rake', '~> 0.9'
 
