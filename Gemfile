@@ -6,11 +6,11 @@ gemspec
 gem 'bcsec', :git => 'git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git'
 
 group :development do
-  gem 'rake', '~> 0.8'
+  gem 'rake', '~> 0.9'
 
   gem 'rspec', '~> 1.3'
 
-  gem 'cucumber', '~> 0.9.0'
+  gem 'cucumber', '~> 0.10.0'
   gem 'mechanize'
 
   gem 'net-ssh'
