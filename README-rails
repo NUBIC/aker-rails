@@ -135,3 +135,30 @@ for which they don't have sufficient privileges is pretty spare and
 unfriendly.  Applications can replace it with something prettier and
 application-appropriate via rack middleware which intercepts 403
 responses.  (TODO: more details and an example.)
+
+### Overriding the login and logout views
+
+You can supply custom login and logout views by providing routes for `/login`
+and `/logout`:
+
+    # In config/routes.rb
+    match '/login' => 'accounts#login'
+    match '/logout' => 'accounts#logout'
+
+Bcsec will now use the views provided by `AccountsController#login` and
+`AccountsController#logout`; however, credential verification and session
+management is still performed by Bcsec.
+
+When overriding the login view, you are responsible for providing a login form
+that satisfies the interface for Bcsec's credential verifier.  Your login form
+should, at minimum, look like this:
+
+    # In app/views/accounts/login.html.erb
+    <%= form_tag('/login') do %>
+      <%= text_field_tag "username" %>
+      <%= password_field_tag "password" %>
+      <%= submit_tag %>
+    <%= end %>
+
+If you want to carry attempted paths across multiple login attempts, you'll
+also need a field for storing a `url` parameter.
