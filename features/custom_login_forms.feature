@@ -12,7 +12,6 @@ Feature: Custom login forms
     Then I am on the login page
     And the page contains "This is a custom login screen"
 
-  @wip
   Scenario: Customizing the logout page
     Given I am logged in as mr296
     When I log out
