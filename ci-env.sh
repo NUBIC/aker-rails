@@ -18,7 +18,7 @@ echo ". ~/.rvm/scripts/rvm"
 . ~/.rvm/scripts/rvm
 set -x
 
-BCSEC_RVM_RUBY='ree-1.8.7-2010.02'
+BCSEC_RVM_RUBY='ree-1.8.7-2011.03'
 GEMSET="bcsec-rails-${JOB_NAME}"
 
 echo "Switching to ${BCSEC_RVM_RUBY}"
