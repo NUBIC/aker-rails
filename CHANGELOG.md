@@ -1,20 +1,19 @@
-Bcsec-Rails History
-===================
-
-3.1.0
------
-
-### Features
-
-- Custom login and logout screens
+Aker-Rails History
+==================
 
 3.0.1
 -----
 
 ### Development
 
+- First open-source version.
+- Project renamed from `bcsec-rails` to `aker-rails` to match the
+  renaming of the main project.
 - Switch integration test suite from Celerity to Mechanize. (#3931)
   This eliminates the JRuby dependency for integration testing.
+
+Bcsec-Rails History
+===================
 
 3.0.0
 -----
