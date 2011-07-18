@@ -1,13 +1,19 @@
-Bcsec-Rails History
-===================
+Aker-Rails History
+==================
 
 2.0.2
 -----
 
 ### Development
 
+- First open-source version.
+- Project renamed from `bcsec-rails` to `aker-rails` to match the
+  renaming of the main project.
 - Switch integration test suite from Celerity to Mechanize. (#3931)
   This eliminates the JRuby dependency for integration testing.
+
+Bcsec-Rails History
+===================
 
 2.0.1
 -----
