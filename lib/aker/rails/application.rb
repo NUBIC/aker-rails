@@ -39,7 +39,7 @@ module Aker::Rails
     #
     # @return [Aker::User,nil]
     def current_user
-      request.env["aker"].user
+      request.env['aker.check'].user
     end
 
     ##
@@ -53,7 +53,7 @@ module Aker::Rails
     #
     # @return [Boolean,Object,nil]
     def permit?(*groups, &block)
-      request.env["aker"].permit?(*groups, &block)
+      request.env['aker.check'].permit?(*groups, &block)
     end
     alias :permit :permit?
   end

@@ -24,7 +24,7 @@ module Aker::Rails
       @controller = FakeApplicationController.new
 
       @env = Rack::MockRequest.env_for('/')
-      @env['aker'] = (@aker = mock)
+      @env['aker.check'] = (@aker = mock)
       @controller.request = Rack::Request.new(@env)
     end
 
