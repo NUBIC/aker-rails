@@ -25,7 +25,7 @@ module Aker::Rails::Test
       it "logs in a user by username" do
         @test_case.login_as("jo")
 
-        @test_case.request.env['aker'].user.username.should == "jo"
+        @test_case.request.env['aker.check'].user.username.should == "jo"
       end
 
       it "accepts Aker::User objects" do
@@ -33,7 +33,7 @@ module Aker::Rails::Test
 
         @test_case.login_as(user)
 
-        @test_case.request.env['aker'].user.should == user
+        @test_case.request.env['aker.check'].user.should == user
       end
     end
   end

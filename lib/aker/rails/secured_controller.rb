@@ -32,7 +32,7 @@ module Aker::Rails
     #
     # @return [void]
     def aker_authorize
-      request.env['aker'].authentication_required!
+      request.env['aker.check'].authentication_required!
     end
 
     ##
@@ -58,7 +58,7 @@ module Aker::Rails
           end
 
         before_filter(options) do |controller|
-          controller.request.env['aker'].permit!(*groups)
+          controller.request.env['aker.check'].permit!(*groups)
         end
       end
     end

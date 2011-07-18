@@ -29,7 +29,7 @@ module Aker::Rails
   describe SecuredController do
     before do
       @request = Rack::Request.new(Rack::MockRequest.env_for("/some"))
-      @aker = (@request.env['aker'] = mock)
+      @aker = (@request.env['aker.check'] = mock)
       @controller = SomeController.new(@request)
     end
 
