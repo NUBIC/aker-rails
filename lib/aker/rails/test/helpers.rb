@@ -7,11 +7,11 @@ require File.join(File.dirname(__FILE__), %w(.. test))
 #
 #     # spec/spec_helper.rb
 #     Spec::Runner.configure do |config|
-#       config.include Bcsec::Rails::Test::Helpers
+#       config.include Aker::Rails::Test::Helpers
 #       ...
 #     end
-module Bcsec::Rails::Test::Helpers
-  include Bcsec::Test::Helpers
+module Aker::Rails::Test::Helpers
+  include Aker::Test::Helpers
 
   ##
   # Logs in a user.
@@ -19,14 +19,14 @@ module Bcsec::Rails::Test::Helpers
   # Users can be identified by:
   #
   # * their username
-  # * building a `Bcsec::User` instance representing that user
+  # * building a `Aker::User` instance representing that user
   # * the return value of
   #
-  #       Bcsec.authority.valid_credentials?(:user, username, password)
+  #       Aker.authority.valid_credentials?(:user, username, password)
   #
-  #   (which is a `Bcsec::User`)
+  #   (which is a `Aker::User`)
   #
-  # @param [String, Bcsec::User] user a user's username or `Bcsec::User` object
+  # @param [String, Aker::User] user a user's username or `Aker::User` object
   def login_as(user)
     request.env.merge!(login_env(user))
   end

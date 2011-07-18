@@ -1,6 +1,6 @@
 ######
 # This is not an executable script.  It selects and configures rvm for
-# bcsec-rails' CI process.
+# aker-rails' CI process.
 #
 # Use it by sourcing it:
 #
@@ -18,12 +18,12 @@ echo ". ~/.rvm/scripts/rvm"
 . ~/.rvm/scripts/rvm
 set -x
 
-BCSEC_RVM_RUBY='ree-1.8.7-2011.03'
-GEMSET="bcsec-rails-${JOB_NAME}"
+AKER_RVM_RUBY='ree-1.8.7-2011.03'
+GEMSET="aker-rails-${JOB_NAME}"
 
-echo "Switching to ${BCSEC_RVM_RUBY}"
+echo "Switching to ${AKER_RVM_RUBY}"
 set +xe
-rvm use "$BCSEC_RVM_RUBY"
+rvm use "$AKER_RVM_RUBY"
 if [ $? -ne 0 ]; then
     echo "Switch failed"
     exit 2;

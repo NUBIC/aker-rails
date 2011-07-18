@@ -2,7 +2,7 @@ require File.expand_path("../../../spec_helper", __FILE__)
 require 'rack'
 require 'action_controller'
 
-module Bcsec::Rails
+module Aker::Rails
   class FakeApplicationController
     attr_accessor :request
 
@@ -14,9 +14,9 @@ module Bcsec::Rails
       @helper_methods ||= []
     end
 
-    Bcsec.configure { }
+    Aker.configure { }
     include Application
-    Bcsec.configuration = nil
+    Aker.configuration = nil
   end
 
   describe Application do
@@ -24,12 +24,12 @@ module Bcsec::Rails
       @controller = FakeApplicationController.new
 
       @env = Rack::MockRequest.env_for('/')
-      @env['bcsec'] = (@bcsec = mock)
+      @env['aker'] = (@aker = mock)
       @controller.request = Rack::Request.new(@env)
     end
 
     it "adds current_user" do
-      @bcsec.should_receive(:user).and_return(Bcsec::User.new("jo"))
+      @aker.should_receive(:user).and_return(Aker::User.new("jo"))
 
       @controller.current_user.username.should == "jo"
     end
@@ -39,14 +39,14 @@ module Bcsec::Rails
     end
 
     describe "#permit?" do
-      it "delegates to the bcsec rack facade" do
-        @bcsec.should_receive(:permit?).with(:bar, :quux)
+      it "delegates to the aker rack facade" do
+        @aker.should_receive(:permit?).with(:bar, :quux)
 
         @controller.permit?(:bar, :quux)
       end
 
-      it "passes a block to the bcsec rack facade, if present" do
-        @bcsec.should_receive(:permit?).with(:bar, :quux).and_yield
+      it "passes a block to the aker rack facade, if present" do
+        @aker.should_receive(:permit?).with(:bar, :quux).and_yield
 
         @controller.permit?(:bar, :quux) { 1 + 1 }.should == 2
       end
@@ -57,7 +57,7 @@ module Bcsec::Rails
 
       describe "permit alias" do
         it "exists" do
-          @bcsec.should_receive(:permit?).with(:bar, :baz)
+          @aker.should_receive(:permit?).with(:bar, :baz)
 
           @controller.permit(:bar, :baz)
         end
@@ -71,17 +71,17 @@ module Bcsec::Rails
 
   describe Application, ".one_time_setup" do
     before do
-      Bcsec.configure { }
+      Aker.configure { }
 
       Application.one_time_setup
     end
 
     after do
-      Bcsec.configuration = nil
+      Aker.configuration = nil
     end
 
-    it "adds the bcsec middleware to the action controller middleware stack" do
-      ActionController::Dispatcher.middleware.should include(Bcsec::Rack::Setup)
+    it "adds the aker middleware to the action controller middleware stack" do
+      ActionController::Dispatcher.middleware.should include(Aker::Rack::Setup)
     end
   end
 end

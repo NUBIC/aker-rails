@@ -3,7 +3,7 @@ source "http://download.bioinformatics.northwestern.edu/gems/"
 
 gemspec
 
-gem 'bcsec', :git => 'git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git'
+gem 'aker', :git => 'git://github.com/NUBIC/aker.git'
 
 # avoids long bundle resolution times brought on by actionpack requiring rack
 # ~> 1.1.0, and dependencies evaluated before actionpack (bcaudit, warden)

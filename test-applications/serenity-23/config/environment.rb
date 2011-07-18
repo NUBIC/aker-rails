@@ -16,7 +16,7 @@ Rails::Initializer.run do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
-  config.gem "bcsec-rails", :lib => 'bcsec/rails' # use the version from the enclosing bundle
+  config.gem "aker-rails", :lib => 'aker/rails' # use the version from the enclosing bundle
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
@@ -38,4 +38,4 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
 end
 
-Rails.logger.warn "Bcsec::Rails::VERSION: " + Bcsec::Rails::VERSION
+Rails.logger.warn "Aker::Rails::VERSION: " + Aker::Rails::VERSION

@@ -1,18 +1,18 @@
-require 'bcsec/rails'
+require 'aker/rails'
 
-Rails.logger.debug "Initializing bcsec-rails"
+Rails.logger.debug "Initializing aker-rails"
 # We do this up here to allow the application to override if desired
-Bcsec.configure {
+Aker.configure {
   logger Rails.logger
 }
 config.after_initialize do
-  Bcsec::Rails::Application.one_time_setup
+  Aker::Rails::Application.one_time_setup
 
   if config.cache_classes
-    ApplicationController.send(:include, Bcsec::Rails::Application)
+    ApplicationController.send(:include, Aker::Rails::Application)
   else
     config.to_prepare do
-      ApplicationController.send(:include, Bcsec::Rails::Application)
+      ApplicationController.send(:include, Aker::Rails::Application)
     end
   end
 end

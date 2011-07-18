@@ -9,10 +9,10 @@ require File.expand_path('../mechanize_test', __FILE__)
 # Note: there is additional boot-time configuration after the world
 # definition
 
-module Bcsec::Rails
+module Aker::Rails
   module Cucumber
     class World
-      include Bcsec::Rails::Cucumber::MechanizeTest
+      include Aker::Rails::Cucumber::MechanizeTest
       include FileUtils
       include Spec::Matchers
 
@@ -83,7 +83,7 @@ module Bcsec::Rails
       end
 
       def tmpdir
-        @tmpdir ||= "/tmp/bcsec-rails-rails2-integrated-tests"
+        @tmpdir ||= "/tmp/aker-rails-rails2-integrated-tests"
         unless File.exist?(@tmpdir)
           mkdir_p @tmpdir
           puts "Using tmpdir #{@tmpdir}"
@@ -95,7 +95,7 @@ module Bcsec::Rails
 end
 
 World do
-  Bcsec::Rails::Cucumber::World.new
+  Aker::Rails::Cucumber::World.new
 end
 
 # The application uses a separate bundle, so it needs to run in a
@@ -103,6 +103,6 @@ end
 # to test, so it doesn't need to be started and stopped with each
 # test.
 at_exit do
-  Bcsec::Rails::Cucumber::World.stop
+  Aker::Rails::Cucumber::World.stop
 end
-Bcsec::Rails::Cucumber::World.start
+Aker::Rails::Cucumber::World.start

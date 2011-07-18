@@ -1,7 +1,7 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 require 'rack'
 
-module Bcsec::Rails
+module Aker::Rails
   class SomeController
     attr_accessor :request
 
@@ -23,36 +23,36 @@ module Bcsec::Rails
       @before_filters ||= []
     end
 
-    include Bcsec::Rails::SecuredController
+    include Aker::Rails::SecuredController
   end
 
   describe SecuredController do
     describe "deprecated alias" do
-      it "is aliased as Bcsec::SecuredController" do
-        ::Bcsec::Rails::SecuredController.should == ::Bcsec::SecuredController
+      it "is aliased as Aker::SecuredController" do
+        ::Aker::Rails::SecuredController.should == ::Aker::SecuredController
       end
 
-      it "warns about using Bcsec::SecuredController" do
-        ::Bcsec::SecuredController
+      it "warns about using Aker::SecuredController" do
+        ::Aker::SecuredController
         deprecation_message.should =~
-          /Use Bcsec::Rails::SecuredController instead of Bcsec::SecuredController.*2.2/
+          /Use Aker::Rails::SecuredController instead of Aker::SecuredController.*2.2/
       end
     end
 
     before do
       @request = Rack::Request.new(Rack::MockRequest.env_for("/some"))
-      @bcsec = (@request.env['bcsec'] = mock)
+      @aker = (@request.env['aker'] = mock)
       @controller = SomeController.new(@request)
     end
 
-    describe "#bcsec_authorize" do
+    describe "#aker_authorize" do
       it "is registered as a filter" do
-        @controller.class.before_filters.should == [ [:bcsec_authorize] ]
+        @controller.class.before_filters.should == [ [:aker_authorize] ]
       end
 
-      it "invokes authentication_required on the bcsec rack facade" do
-        @bcsec.should_receive(:authentication_required!)
-        @controller.bcsec_authorize
+      it "invokes authentication_required on the aker rack facade" do
+        @aker.should_receive(:authentication_required!)
+        @controller.aker_authorize
       end
     end
 

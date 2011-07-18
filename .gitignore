@@ -1,6 +1,6 @@
 .bundle
 Gemfile.lock
-bcsec-rails*.gem
+aker-rails*.gem
 
 reports
 coverage

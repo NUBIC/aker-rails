@@ -2,18 +2,18 @@ require File.expand_path("../../../../spec_helper", __FILE__)
 require 'action_controller'
 require 'action_controller/test_process'
 
-module Bcsec::Rails::Test
+module Aker::Rails::Test
   describe Helpers do
     before do
-      Bcsec.configure do
-        s = Bcsec::Authorities::Static.new
+      Aker.configure do
+        s = Aker::Authorities::Static.new
 
         s.valid_credentials!(:user, "jo", "50-50")
         authorities s
       end
 
       @test_case = Class.new do
-        include Bcsec::Rails::Test::Helpers
+        include Aker::Rails::Test::Helpers
 
         def request
           @request ||= ActionController::TestRequest.new
@@ -25,15 +25,15 @@ module Bcsec::Rails::Test
       it "logs in a user by username" do
         @test_case.login_as("jo")
 
-        @test_case.request.env['bcsec'].user.username.should == "jo"
+        @test_case.request.env['aker'].user.username.should == "jo"
       end
 
-      it "accepts Bcsec::User objects" do
-        user = Bcsec::User.new("jo")
+      it "accepts Aker::User objects" do
+        user = Aker::User.new("jo")
 
         @test_case.login_as(user)
 
-        @test_case.request.env['bcsec'].user.should == user
+        @test_case.request.env['aker'].user.should == user
       end
     end
   end

@@ -1,18 +1,18 @@
-require 'bcsec/rails'
+require 'aker/rails'
 
-module Bcsec::Rails
+module Aker::Rails
   ##
   # A mixin for the rails application controller.  Provides global
-  # bcsec integration, but does not enforce any authentication or
+  # aker integration, but does not enforce any authentication or
   # authorization requirements.  (See
-  # {Bcsec::Rails::SecuredController} for one way to enforce
+  # {Aker::Rails::SecuredController} for one way to enforce
   # authentication and authorization.)
   #
   # This module is automatically mixed into the application controller
   # when the plugin is initialized.
   module Application
     ##
-    # Sets up the bcsec global infrastructure and helpers in the
+    # Sets up the aker global infrastructure and helpers in the
     # application controller.
     #
     # @return [void]
@@ -23,13 +23,13 @@ module Bcsec::Rails
     end
 
     ##
-    # Sets up the bcsec global infrastructure that is not affected by
+    # Sets up the aker global infrastructure that is not affected by
     # Rails' development-mode class reloading.
     #
     # @return [void]
     def self.one_time_setup
-      Bcsec::Rack.use_in(ActionController::Dispatcher.middleware)
-      Rack::Request.send(:include, Bcsec::Rack::RequestExt)
+      Aker::Rack.use_in(ActionController::Dispatcher.middleware)
+      Rack::Request.send(:include, Aker::Rack::RequestExt)
     end
 
     ##
@@ -37,23 +37,23 @@ module Bcsec::Rails
     #
     # This method is also available to views (i.e., it is a helper).
     #
-    # @return [Bcsec::User,nil]
+    # @return [Aker::User,nil]
     def current_user
-      request.env["bcsec"].user
+      request.env["aker"].user
     end
 
     ##
     # Aids group-level authorization.  It is safe to call this method
     # without checking that there is a logged in user first.
     #
-    # This method delegates directly to {Bcsec::Rack::Facade#permit?};
+    # This method delegates directly to {Aker::Rack::Facade#permit?};
     # see the documentation for that method for more information.
     #
     # This method is also available to views (i.e., it is a helper).
     #
     # @return [Boolean,Object,nil]
     def permit?(*groups, &block)
-      request.env["bcsec"].permit?(*groups, &block)
+      request.env["aker"].permit?(*groups, &block)
     end
     alias :permit :permit?
   end
