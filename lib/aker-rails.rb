@@ -7,6 +7,6 @@
 # via a subclassing callback.  See `Rails::Railtie.inherited`.)
 #
 # If you change the `Bundler.require` behavior in your application's
-# `config/application.rb` such that `bcsec-rails` is not loaded, you will have
-# to load `bcsec/rails/railtie` yourself.
-require 'bcsec/rails/railtie'
+# `config/application.rb` such that `aker-rails` is not loaded, you will have
+# to load `aker/rails/railtie` yourself.
+require 'aker/rails/railtie'

@@ -1,5 +1,5 @@
 class PermitController < ApplicationController
-  include Bcsec::Rails::SecuredController
+  include Aker::Rails::SecuredController
 
   permit :owners
 

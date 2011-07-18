@@ -3,7 +3,7 @@ source "http://download.bioinformatics.northwestern.edu/gems/"
 
 gemspec
 
-gem 'bcsec', :git => 'git+ssh://code.bioinformatics.northwestern.edu/git/bcsec.git'
+gem 'aker', :git => 'git://github.com/NUBIC/aker.git'
 
 group :resolver_hacks do
   gem 'builder', '~> 2.1.2'

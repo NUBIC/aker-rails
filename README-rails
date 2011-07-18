@@ -1,37 +1,37 @@
-Bcsec-Rails
+Aker-Rails
 ===========
 
-`bcsec-rails` is the Rails plugin for Bcsec 2.1 and later.  It is a
-thin wrapper around Bcsec's rack support.
+`aker-rails` is the Rails plugin for Aker 2.1 and later.  It is a
+thin wrapper around Aker's rack support.
 
 Setup
 -----
 
 ### Prerequisites
 
-`bcsec-rails` requires Rails ~> 3.0.
+`aker-rails` requires Rails ~> 3.0.
 
 ### Get the gem
 
-`bcsec-rails` is a gem plugin.  In order to use it, include it in your
+`aker-rails` is a gem plugin.  In order to use it, include it in your
 application's Gemfile:
 
     source 'http://download.bioinformatics.northwestern.edu/gems'
 
-    gem 'bcsec-rails'
+    gem 'aker-rails'
 
 Between this and the `Bundler.require` that most Rails 3 applications do
 as part of their initialization process, that's all you usually need to
-do to get bcsec and bcsec-rails loaded in your Rails application.
+do to get aker and aker-rails loaded in your Rails application.
 
-### Add an initializer for bcsec
+### Add an initializer for aker
 
 Put your global configuration in an initializer. By _global
 configuration_ I mean the parts that are the same no matter which
 environment you are using, like the portal name and the modes.
 
-    # In config/initializers/bcsec.rb
-    Bcsec.configure do
+    # In config/initializers/aker.rb
+    Aker.configure do
       # The authentication protocol to use for interactive access.
       # `:form` is the default.
       ui_mode :form
@@ -45,12 +45,12 @@ environment you are using, like the portal name and the modes.
     end
 
 For more information on the configuration syntax and options, see the
-bcsec API documentation for {Bcsec::Configuration}.
+aker API documentation for {Aker::Configuration}.
 
 ### Add per-environment configurations
 
 In the environment initializer for each of your application's
-environments, put the parts of the Bcsec configuration which are
+environments, put the parts of the Aker configuration which are
 env-specific.  E.g., you might only use the `netid` authority in staging
 and production since full access to the NU LDAP servers is only
 available from behind the firewall.  This means that the `authorities`
@@ -58,21 +58,21 @@ line will be env-specific.
 
     # In config/environments/production.rb, for example
     config.after_initialize do
-      Bcsec.configure do
-        # The authorities to use.  See the bcsec API documentation
-        # for `Bcsec::Authorities` for options.
+      Aker.configure do
+        # The authorities to use.  See the aker API documentation
+        # for `Aker::Authorities` for options.
         authorities :netid, :pers
 
         # The server-central parameters file for cc_pers, NU LDAP,
         # CAS, and policy parameters.
-        central '/etc/nubic/bcsec-prod.yml'
+        central '/etc/nubic/aker-prod.yml'
       end
     end
 
 Integration into your app
 -------------------------
 
-With the plugin installed, Bcsec provides a general infrastructure for
+With the plugin installed, Aker provides a general infrastructure for
 supporting authentication and authorization in your application.  If
 you want to _require_ authentication or authorization for particular
 resources (and I think you do), you need to do a bit more
@@ -81,24 +81,24 @@ configuration.
 ### Securing pages
 
 In any controller which authentication is required, include
-{Bcsec::Rails::SecuredController}.  If authentication is required for
+{Aker::Rails::SecuredController}.  If authentication is required for
 all controllers, you can include this module in
 `ApplicationController`.
 
 If you want to further require that all actions in a controller
 require that the user be a member of a certain group, you can use the
-{Bcsec::Rails::SecuredController::ClassMethods#permit permit} method:
+{Aker::Rails::SecuredController::ClassMethods#permit permit} method:
 
     class ManuscriptController < ApplicationController
-      include Bcsec::Rails::SecuredController
+      include Aker::Rails::SecuredController
       permit :editor
     end
 
 ### Partial authorization
 
-Bcsec also supports resources which are only partially limited to a
+Aker also supports resources which are only partially limited to a
 particular group or groups.  The helper for this is also called
-{Bcsec::Rails::Application#permit? permit}:
+{Aker::Rails::Application#permit? permit}:
 
     # In a controller action
     class DashboardController < ApplicationController
@@ -117,15 +117,15 @@ particular group or groups.  The helper for this is also called
 
 This permit helper is available to all subclasses of
 `ApplicationController`, not just ones that mix in
-{Bcsec::Rails::SecuredController}.  This means you can have a
+{Aker::Rails::SecuredController}.  This means you can have a
 publically-accessible page which has additional/different content for a
 logged-in user.
 
 ### The current user
 
-Bcsec provides a method {Bcsec::Rails::Application#current_user
+Aker provides a method {Aker::Rails::Application#current_user
 current_user} to all controllers and views.  It will return a
-{Bcsec::User} object for the current user, or `nil` if there isn't
+{Aker::User} object for the current user, or `nil` if there isn't
 one.
 
 ### Overriding the unauthorized view
@@ -145,12 +145,12 @@ and `/logout`:
     match '/login' => 'accounts#login'
     match '/logout' => 'accounts#logout'
 
-Bcsec will now use the views provided by `AccountsController#login` and
+Aker will now use the views provided by `AccountsController#login` and
 `AccountsController#logout`; however, credential verification and session
-management is still performed by Bcsec.
+management is still performed by Aker.
 
 When overriding the login view, you are responsible for providing a login form
-that satisfies the interface for Bcsec's credential verifier.  Your login form
+that satisfies the interface for Aker's credential verifier.  Your login form
 should, at minimum, look like this:
 
     # In app/views/accounts/login.html.erb

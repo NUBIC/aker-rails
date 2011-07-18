@@ -1,24 +1,24 @@
-require 'bcsec/rails'
+require 'aker/rails'
 
 require 'rails/railtie'
 
-module Bcsec::Rails
+module Aker::Rails
   class Railtie < ::Rails::Railtie
-    initializer 'Bcsec::Rails initialization' do |app|
-      Rails.logger.debug "Initializing bcsec-rails"
+    initializer 'Aker::Rails initialization' do |app|
+      Rails.logger.debug "Initializing aker-rails"
 
-      Bcsec.configure do
+      Aker.configure do
         logger Rails.logger
       end
 
-      Bcsec::Rack.use_in(app.middleware)
+      Aker::Rack.use_in(app.middleware)
 
-      Rack::Request.send(:include, Bcsec::Rack::RequestExt)
+      Rack::Request.send(:include, Aker::Rack::RequestExt)
     end
 
-    initializer 'Bcsec::Rails development support' do |app|
+    initializer 'Aker::Rails development support' do |app|
       app.config.to_prepare do
-        ApplicationController.send(:include, Bcsec::Rails::Application)
+        ApplicationController.send(:include, Aker::Rails::Application)
       end
     end
 
@@ -29,7 +29,7 @@ module Bcsec::Rails
         custom_login  = app.routes.routes.any? { |r| r.path =~ %r{^/login} }
         custom_logout = app.routes.routes.any? { |r| r.path =~ %r{^/logout} }
 
-        Bcsec.configure do
+        Aker.configure do
           rack_parameters :use_custom_login_page => custom_login, :use_custom_logout_page => custom_logout
         end
       end

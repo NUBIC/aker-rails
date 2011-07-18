@@ -1,7 +1,7 @@
 require File.expand_path("../../../spec_helper", __FILE__)
 require 'rack'
 
-module Bcsec::Rails
+module Aker::Rails
   class SomeController
     attr_accessor :request
 
@@ -23,24 +23,24 @@ module Bcsec::Rails
       @before_filters ||= []
     end
 
-    include Bcsec::Rails::SecuredController
+    include Aker::Rails::SecuredController
   end
 
   describe SecuredController do
     before do
       @request = Rack::Request.new(Rack::MockRequest.env_for("/some"))
-      @bcsec = (@request.env['bcsec'] = mock)
+      @aker = (@request.env['aker'] = mock)
       @controller = SomeController.new(@request)
     end
 
-    describe "#bcsec_authorize" do
+    describe "#aker_authorize" do
       it "is registered as a filter" do
-        @controller.class.before_filters.should == [ [:bcsec_authorize] ]
+        @controller.class.before_filters.should == [ [:aker_authorize] ]
       end
 
-      it "invokes authentication_required on the bcsec rack facade" do
-        @bcsec.should_receive(:authentication_required!)
-        @controller.bcsec_authorize
+      it "invokes authentication_required on the aker rack facade" do
+        @aker.should_receive(:authentication_required!)
+        @controller.aker_authorize
       end
     end
 

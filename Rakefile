@@ -13,9 +13,9 @@ require 'net/scp'
 
 require 'ci/reporter/rake/rspec'
 
-require 'bcsec/rails'
+require 'aker/rails'
 
-gemspec = eval(File.read('bcsec-rails.gemspec'), binding, 'bcsec-rails.gemspec')
+gemspec = eval(File.read('aker-rails.gemspec'), binding, 'aker-rails.gemspec')
 
 Gem::PackageTask.new(gemspec).define
 
@@ -69,7 +69,7 @@ desc "Build API documentation with yard"
 docsrc = %w(lib/**/*.rb -) + Dir.glob("{CHANGELOG,MIGRATION}-rails")
 YARD::Rake::YardocTask.new do |t|
   t.options = %w(--no-private --markup markdown --hide-void-return)
-  t.options += ["--title", "bcsec-rails #{Bcsec::Rails::VERSION}"]
+  t.options += ["--title", "aker-rails #{Aker::Rails::VERSION}"]
   t.files = docsrc
 end
 
@@ -132,8 +132,8 @@ end
 
 namespace :deploy do
   task :check do
-    if Bcsec::Rails::VERSION.split('.').any? { |v| v =~ /\D/i }
-      puts "#{Bcsec::Rails::VERSION} is a prerelease version.  " <<
+    if Aker::Rails::VERSION.split('.').any? { |v| v =~ /\D/i }
+      puts "#{Aker::Rails::VERSION} is a prerelease version.  " <<
         "Are you sure you want to deploy?\n" <<
         "Press ^C to abort or enter to continue deploying."
       STDIN.readline
@@ -157,8 +157,8 @@ namespace :deploy do
 
   desc "Tag the final version of a release"
   task :tag => [:check] do
-    tagname = Bcsec::Rails::VERSION
-    system("git tag -a #{tagname} -m 'Bcsec-Rails #{Bcsec::Rails::VERSION}'")
+    tagname = Aker::Rails::VERSION
+    system("git tag -a #{tagname} -m 'Aker-Rails #{Aker::Rails::VERSION}'")
     fail "Tagging failed" unless $? == 0
     system("git push origin : #{tagname}")
   end

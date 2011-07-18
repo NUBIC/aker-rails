@@ -1,16 +1,16 @@
-require 'bcsec/rails'
+require 'aker/rails'
 
-module Bcsec::Rails
+module Aker::Rails
   ##
   # This mixin tags a controller as always requiring authentication.
   #
   # It also adds a
-  # {Bcsec::Rails::SecuredController::ClassMethods#permit method}
+  # {Aker::Rails::SecuredController::ClassMethods#permit method}
   # which allows you to mark a controller as only accessible to a
   # particular group or groups.  For example:
   #
   #     class SecretController
-  #       include Bcsec::Rails::SecuredController
+  #       include Aker::Rails::SecuredController
   #       permit :confidential
   #     end
   module SecuredController
@@ -19,7 +19,7 @@ module Bcsec::Rails
     #   description
     # @return [void]
     def self.included(controller_class)
-      controller_class.before_filter :bcsec_authorize
+      controller_class.before_filter :aker_authorize
       controller_class.extend ClassMethods
     end
 
@@ -27,12 +27,12 @@ module Bcsec::Rails
     # The filter which actually forces any user accessing a controller
     # which mixes this in to be authenticated.
     #
-    # It delegates to {Bcsec::Rack::Facade#authentication_required!};
+    # It delegates to {Aker::Rack::Facade#authentication_required!};
     # see that method's documentation for more information.
     #
     # @return [void]
-    def bcsec_authorize
-      request.env['bcsec'].authentication_required!
+    def aker_authorize
+      request.env['aker'].authentication_required!
     end
 
     ##
@@ -45,7 +45,7 @@ module Bcsec::Rails
       # Tags a controller as requiring that a user both be
       # authenticated and belong to one of a set of groups.
       #
-      # It delegates to {Bcsec::Rack::Facade#permit!}; see that
+      # It delegates to {Aker::Rack::Facade#permit!}; see that
       # methods's documentation for more information.
       #
       # @return [void]
@@ -58,14 +58,14 @@ module Bcsec::Rails
           end
 
         before_filter(options) do |controller|
-          controller.request.env['bcsec'].permit!(*groups)
+          controller.request.env['aker'].permit!(*groups)
         end
       end
     end
   end
 end
 
-module Bcsec
+module Aker
   class << self
     alias :prerails_const_missing :const_missing
 
@@ -74,9 +74,9 @@ module Bcsec
     def const_missing(name)
       case name
       when :SecuredController
-        Bcsec::Deprecation.
-          notify("Use Bcsec::Rails::SecuredController instead of Bcsec::SecuredController.", "2.2")
-        Bcsec::Rails::SecuredController
+        Aker::Deprecation.
+          notify("Use Aker::Rails::SecuredController instead of Aker::SecuredController.", "2.2")
+        Aker::Rails::SecuredController
       else
         prerails_const_missing(name)
       end
