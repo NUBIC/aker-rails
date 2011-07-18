@@ -1,8 +1,12 @@
 Aker-Rails
 ===========
 
-`aker-rails` is the Rails plugin for Aker 2.1 and later.  It is a
+`aker-rails` is the Rails plugin for Aker 3.0 and later.  It is a
 thin wrapper around Aker's rack support.
+
+There are separate plugins for Rails 3.x and Rails 2.3.x. You're
+looking at the version for **Rails 3.x**. The version for Rails 2.3.x
+has a version number with major version 2.
 
 Setup
 -----
@@ -11,12 +15,15 @@ Setup
 
 `aker-rails` requires Rails ~> 3.0.
 
+Since `aker-rails` is just a thin wrapper, you'll want to be familiar
+with [Aker][] before you get started.
+
+[Aker]: http://rubydoc.info/github/NUBIC/aker/master/file/README.md
+
 ### Get the gem
 
 `aker-rails` is a gem plugin.  In order to use it, include it in your
 application's Gemfile:
-
-    source 'http://download.bioinformatics.northwestern.edu/gems'
 
     gem 'aker-rails'
 
@@ -51,20 +58,21 @@ aker API documentation for {Aker::Configuration}.
 
 In the environment initializer for each of your application's
 environments, put the parts of the Aker configuration which are
-env-specific.  E.g., you might only use the `netid` authority in staging
-and production since full access to the NU LDAP servers is only
-available from behind the firewall.  This means that the `authorities`
-line will be env-specific.
+env-specific. E.g., the LDAP server you use in production might not be
+visible from your workstation. This means that the `authorities` line
+will be env-specific.
 
     # In config/environments/production.rb, for example
     config.after_initialize do
       Aker.configure do
         # The authorities to use.  See the aker API documentation
         # for `Aker::Authorities` for options.
-        authorities :netid, :pers
+        authorities :ldap
 
-        # The server-central parameters file for cc_pers, NU LDAP,
-        # CAS, and policy parameters.
+        # The server-central parameters file for authority
+        # and policy parameters (optional). See
+        # `Aker::CentralParameters` for a discussion of why this is a
+        # good idea.
         central '/etc/nubic/aker-prod.yml'
       end
     end
@@ -127,38 +135,3 @@ Aker provides a method {Aker::Rails::Application#current_user
 current_user} to all controllers and views.  It will return a
 {Aker::User} object for the current user, or `nil` if there isn't
 one.
-
-### Overriding the unauthorized view
-
-The message that your users will see if they try to access a resource
-for which they don't have sufficient privileges is pretty spare and
-unfriendly.  Applications can replace it with something prettier and
-application-appropriate via rack middleware which intercepts 403
-responses.  (TODO: more details and an example.)
-
-### Overriding the login and logout views
-
-You can supply custom login and logout views by providing routes for `/login`
-and `/logout`:
-
-    # In config/routes.rb
-    match '/login' => 'accounts#login'
-    match '/logout' => 'accounts#logout'
-
-Aker will now use the views provided by `AccountsController#login` and
-`AccountsController#logout`; however, credential verification and session
-management is still performed by Aker.
-
-When overriding the login view, you are responsible for providing a login form
-that satisfies the interface for Aker's credential verifier.  Your login form
-should, at minimum, look like this:
-
-    # In app/views/accounts/login.html.erb
-    <%= form_tag('/login') do %>
-      <%= text_field_tag "username" %>
-      <%= password_field_tag "password" %>
-      <%= submit_tag %>
-    <%= end %>
-
-If you want to carry attempted paths across multiple login attempts, you'll
-also need a field for storing a `url` parameter.
