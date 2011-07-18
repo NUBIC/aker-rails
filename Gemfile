@@ -1,5 +1,4 @@
 source :rubygems
-source "http://download.bioinformatics.northwestern.edu/gems/"
 
 gemspec
 
@@ -18,12 +17,8 @@ group :development do
   gem 'cucumber', '~> 0.10.0'
   gem 'mechanize'
 
-  gem 'net-ssh'
-  gem 'net-scp'
-
-  gem 'yard', '~> 0.5'
+  gem 'yard', '~> 0.6'
   gem 'rdiscount'
-  gem 'fssm'
 
   gem 'rcov'
   gem 'ci_reporter', '~> 1.6'
