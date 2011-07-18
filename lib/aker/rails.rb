@@ -13,7 +13,4 @@ module Aker
     autoload :SecuredController, 'aker/rails/secured_controller'
     autoload :Test,              'aker/rails/test'
   end
-
-  # TODO: deprecate this somehow
-  autoload :SecuredController, 'aker/rails/secured_controller'
 end

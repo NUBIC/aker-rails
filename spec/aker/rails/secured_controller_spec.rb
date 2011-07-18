@@ -27,18 +27,6 @@ module Aker::Rails
   end
 
   describe SecuredController do
-    describe "deprecated alias" do
-      it "is aliased as Aker::SecuredController" do
-        ::Aker::Rails::SecuredController.should == ::Aker::SecuredController
-      end
-
-      it "warns about using Aker::SecuredController" do
-        ::Aker::SecuredController
-        deprecation_message.should =~
-          /Use Aker::Rails::SecuredController instead of Aker::SecuredController.*2.2/
-      end
-    end
-
     before do
       @request = Rack::Request.new(Rack::MockRequest.env_for("/some"))
       @aker = (@request.env['aker.check'] = mock)

@@ -64,22 +64,3 @@ module Aker::Rails
     end
   end
 end
-
-module Aker
-  class << self
-    alias :prerails_const_missing :const_missing
-
-    ##
-    # @private -- provides deprecated features only
-    def const_missing(name)
-      case name
-      when :SecuredController
-        Aker::Deprecation.
-          notify("Use Aker::Rails::SecuredController instead of Aker::SecuredController.", "2.2")
-        Aker::Rails::SecuredController
-      else
-        prerails_const_missing(name)
-      end
-    end
-  end
-end
