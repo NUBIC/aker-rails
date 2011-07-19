@@ -43,10 +43,6 @@ When /^I access (?:an?|the) (\S+) page$/ do |page_name|
   get url
 end
 
-When /^I log out$/ do
-  get '/logout'
-end
-
 Then /^I can access that (\S+) page$/ do |page_name|
   page.code.should == '200'
 

@@ -13,19 +13,5 @@ module Aker::Rails
     it "sets up a to_prepare hook for Aker::Rails::Application" do
       pending "need to figure out a good way to test railties"
     end
-
-    context "when the form UI mode is in use" do
-      context "and a /login route is defined" do
-        it "instructs Aker to not use its built-in login form" do
-          pending "need to figure out a good way to test railties"
-        end
-      end
-
-      context "and a /logout route is defined" do
-        it "instructs Aker to not use its built-in logout screen" do
-          pending "need to figure out a good way to test railties"
-        end
-      end
-    end
   end
 end
