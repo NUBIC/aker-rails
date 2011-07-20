@@ -7,6 +7,12 @@ Aker-Rails History
 3.0.1
 -----
 
+### Fixes
+
+- Non-form UI modes can have their middleware correctly applied
+  (#1). This requires a rearrangement of your application's
+  configuration code; see the README for details.
+
 ### Development
 
 - First open-source version.
@@ -14,9 +20,6 @@ Aker-Rails History
   renaming of the main project.
 - Switch integration test suite from Celerity to Mechanize. (#3931)
   This eliminates the JRuby dependency for integration testing.
-- Fixed: non-form UI modes can have their middleware correctly applied
-  (#1). This requires a rearrangement of your application's
-  configuration code; see the README for details.
 
 Bcsec-Rails History
 ===================
