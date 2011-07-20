@@ -36,6 +36,8 @@ When /^I access (?:an?|the) (\S+) page$/ do |page_name|
       '/owners'
     when 'portal'
       '/portal'
+    when 'logout'
+      '/logout'
     else
       pending "No URL defined for a #{page_name} page"
     end
