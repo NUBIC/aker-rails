@@ -15,3 +15,7 @@ module Aker
     autoload :Test,              'aker/rails/test'
   end
 end
+
+# This is directly required because the configuration extensions it
+# defines need to be automatically available when the plugin is loaded.
+require 'aker/rails/configuration_ext'

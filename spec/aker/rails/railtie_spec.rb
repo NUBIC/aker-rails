@@ -6,7 +6,7 @@ module Aker::Rails
       pending "need to figure out a good way to test railties"
     end
 
-    it "installs the Aker middleware" do
+    it "installs the Aker middleware exactly once" do
       pending "need to figure out a good way to test railties"
     end
 

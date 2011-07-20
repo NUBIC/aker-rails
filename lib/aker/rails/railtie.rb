@@ -5,15 +5,20 @@ require 'rails/railtie'
 module Aker::Rails
   class Railtie < ::Rails::Railtie
     initializer 'Aker::Rails initialization' do |app|
-      Rails.logger.debug "Initializing aker-rails"
+      Rails.logger.debug "Initializing Aker-Rails"
 
       Aker.configure do
         logger Rails.logger
       end
 
-      Aker::Rack.use_in(app.middleware)
-
       Rack::Request.send(:include, Aker::Rack::RequestExt)
+    end
+
+    initializer 'Aker::Rails middleware installation' do |app|
+      Rails.logger.debug "Installing Aker rack middleware"
+      Rails.logger.debug "- UI mode:   #{Aker.configuration.ui_mode.inspect}"
+      Rails.logger.debug "- API modes: #{Aker.configuration.api_modes.inspect}"
+      Aker::Rack.use_in(app.middleware)
     end
 
     initializer 'Aker::Rails development support' do |app|

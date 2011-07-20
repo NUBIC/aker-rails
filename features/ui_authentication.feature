@@ -23,7 +23,6 @@ Feature: Interactive authentication
      When I access a public page
      Then the page contains "Even mr296"
 
-  @wip
   Scenario: When logging out, a user sees the application's logout page
     Given I am logged in as mr296
      When I access the logout page

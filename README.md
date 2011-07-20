@@ -31,16 +31,16 @@ Between this and the `Bundler.require` that most Rails 3 applications do
 as part of their initialization process, that's all you usually need to
 do to get aker and aker-rails loaded in your Rails application.
 
-### Add an initializer for aker
+### Add a global configuration for Aker
 
-Put your global configuration in an initializer. By _global
+Put your global configuration `config/application.rb`. By _global
 configuration_ I mean the parts that are the same no matter which
 environment you are using, like the portal name and the modes.
 
-    # In config/initializers/aker.rb
-    Aker.configure do
+    # In config/application.rb, inside the Application subclass definition
+    config.aker do
       # The authentication protocol to use for interactive access.
-      # `:form` is the default.
+      # :form is the default.
       ui_mode :form
 
       # The authentication protocol(s) to use for non-interactive
@@ -51,8 +51,12 @@ environment you are using, like the portal name and the modes.
       portal :ENU
     end
 
+(Migration note: this differs from the Rails 2.3 version of this
+plugin. *Aker configuration should not happen in a Rails 3
+initializer.*)
+
 For more information on the configuration syntax and options, see the
-aker API documentation for {Aker::Configuration}.
+aker API documentation for `Aker::Configuration`.
 
 ### Add per-environment configurations
 
@@ -63,19 +67,22 @@ visible from your workstation. This means that the `authorities` line
 will be env-specific.
 
     # In config/environments/production.rb, for example
-    config.after_initialize do
-      Aker.configure do
-        # The authorities to use.  See the aker API documentation
-        # for `Aker::Authorities` for options.
-        authorities :ldap
+    config.aker do
+      # The authorities to use.  See the aker API documentation
+      # for Aker::Authorities for options.
+      authorities :ldap
 
-        # The server-central parameters file for authority
-        # and policy parameters (optional). See
-        # `Aker::CentralParameters` for a discussion of why this is a
-        # good idea.
-        central '/etc/nubic/aker-prod.yml'
-      end
+      # The server-central parameters file for authority
+      # and policy parameters (optional). See
+      # Aker::CentralParameters for a discussion of why this is a
+      # good idea.
+      central '/etc/nubic/aker-prod.yml'
     end
+
+(Migration note: this differs from the Rails 2.3 version of this
+plugin. *Aker configuration should not happen in a Rails 3
+after_initialize block.*)
+
 
 Integration into your app
 -------------------------
