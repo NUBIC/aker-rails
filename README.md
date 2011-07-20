@@ -1,5 +1,5 @@
 Aker-Rails
-===========
+==========
 
 `aker-rails` is the Rails plugin for Aker 3.0 and later.  It is a
 thin wrapper around Aker's rack support.
@@ -7,6 +7,13 @@ thin wrapper around Aker's rack support.
 There are separate plugins for Rails 3.x and Rails 2.3.x. You're
 looking at the version for **Rails 3.x**. The version for Rails 2.3.x
 has a version number with major version 2.
+
+Reader's note: this README uses [YARD][] markup to provide links to
+Aker-Rails' API documentation. If you aren't already, consider reading it
+on [rubydoc.info][] so that the links will be followable.
+
+[YARD]: http://yardoc.org/
+[rubydoc.info]: http://rubydoc.info/github/NUBIC/aker-rails/rails3/file/README.md
 
 Setup
 -----
@@ -140,5 +147,5 @@ logged-in user.
 
 Aker provides a method {Aker::Rails::Application#current_user
 current_user} to all controllers and views.  It will return a
-{Aker::User} object for the current user, or `nil` if there isn't
+`Aker::User` object for the current user, or `nil` if there isn't
 one.
