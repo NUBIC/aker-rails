@@ -19,7 +19,7 @@ echo ". ~/.rvm/scripts/rvm"
 set -x
 
 AKER_RVM_RUBY='ree-1.8.7-2011.03'
-GEMSET="aker-rails-${JOB_NAME}"
+GEMSET=`echo "${JOB_NAME}" | sed 's/ /_/g'`
 
 echo "Switching to ${AKER_RVM_RUBY}"
 set +xe
