@@ -4,6 +4,11 @@ Aker-Rails History
 2.0.3
 -----
 
+### Development
+
+- Added missing LICENSE. Aker-Rails is made available under the MIT
+  license.
+
 2.0.2
 -----
 
