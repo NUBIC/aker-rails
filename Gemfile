@@ -4,9 +4,7 @@ gemspec
 
 gem 'aker', :git => 'git://github.com/NUBIC/aker.git'
 
-group :resolver_hacks do
-  gem 'builder', '~> 2.1.2'
-end
+eval(File.read File.expand_path('../Gemfile.rails_version', __FILE__))
 
 group :development do
   gem 'rake', '~> 0.9'

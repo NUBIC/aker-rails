@@ -4,4 +4,5 @@ plugin_root = File.expand_path("../../..", __FILE__)
 
 gem 'aker', :git => 'git://github.com/NUBIC/aker.git'
 gem 'aker-rails', :path => plugin_root
-gem 'rails', '~> 3.0'
+
+eval(File.read File.join(plugin_root, 'Gemfile.rails_version'))
