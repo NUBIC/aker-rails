@@ -8,6 +8,8 @@ if ENV['RAILS_VERSION']
     gem 'builder', '~> 2.1.2', :group => :resolver_hacks
   when /3.1$/
     gem 'rails', '~> 3.1.0'
+  when /3.2$/
+    gem 'rails', '~> 3.2.0.rc1'
   else
     fail "Unknown Rails version #{ENV['RAILS_VERSION']}"
   end
