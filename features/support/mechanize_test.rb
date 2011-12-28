@@ -32,7 +32,7 @@ module Aker::Rails::Cucumber
 
     def get(url)
       begin
-        @page = agent.get(:url => app_url(url), :headers => headers)
+        @page = agent.get(app_url(url), [], nil, headers)
       rescue Mechanize::ResponseCodeError => e
         @page = e.page
       end

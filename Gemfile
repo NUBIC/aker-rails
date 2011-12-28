@@ -15,7 +15,7 @@ group :development do
   gem 'rspec', '~> 1.3'
 
   gem 'cucumber', '~> 0.10.0'
-  gem 'mechanize'
+  gem 'mechanize', '~> 2.1'
 
   gem 'yard', '~> 0.6'
   gem 'rdiscount'
