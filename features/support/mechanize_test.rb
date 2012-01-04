@@ -39,6 +39,15 @@ module Aker::Rails::Cucumber
       @headers = nil
     end
 
+    def post(url)
+      begin
+        @page = agent.post(app_url(url), {}, headers)
+      rescue Mechanize::ResponseCodeError => e
+        @page = e.page
+      end
+      @headers = nil
+    end
+
     def submit(form, button=nil)
       button ||= form.buttons.first
       begin
