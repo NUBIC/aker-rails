@@ -35,6 +35,14 @@ module Aker::Rails
       request.env['aker.check'].authentication_required!
     end
 
+    def handle_unverified_request
+      super
+
+      if request.env['aker.interactive']
+        request.env['aker.check'].user = nil
+      end
+    end
+
     ##
     # Extensions for the rails controller DSL for
     # authentication-required controllers.

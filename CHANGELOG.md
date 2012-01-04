@@ -4,6 +4,10 @@ Aker-Rails History
 2.0.3
 -----
 
+### Fixes
+
+- CSRF token verification in Rails >= 2.3.11 is now properly handled (#4).
+
 ### Development
 
 - Added missing LICENSE. Aker-Rails is made available under the MIT

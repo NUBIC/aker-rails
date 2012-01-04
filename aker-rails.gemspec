@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.email = "r-sutphin@northwestern.edu"
   s.homepage = "https://github.com/NUBIC/aker-rails"
 
-  s.add_runtime_dependency "rails", "~> 2.3.5"
+  s.add_runtime_dependency "rails", "~> 2.3.11"
 
   # This is deliberately open -- I expect that this rails plugin will
   # change much less frequently than the library.

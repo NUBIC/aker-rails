@@ -43,6 +43,19 @@ When /^I access (?:an?|the) (\S+) page$/ do |page_name|
   get url
 end
 
+When /^I access a protected page without a CSRF token$/ do
+  post '/protected'
+end
+
+When /^I access a protected page with a correct CSRF token$/ do
+  get '/protected'
+
+  page.body =~ /CSRF (\S+)/
+  header 'X-CSRF-Token', $1
+
+  post '/protected'
+end
+
 Then /^I can access that (\S+) page$/ do |page_name|
   page.code.should == '200'
 
