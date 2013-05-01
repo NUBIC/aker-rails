@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 
-BUNDLER_VERSION=1.1.rc.6
+BUNDLER_VERSION=1.3.5
 GEMSET=aker-rails
 
 export TMPDIR="`pwd`/tmp"
