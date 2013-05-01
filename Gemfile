@@ -17,6 +17,5 @@ group :development do
   gem 'yard', '~> 0.6'
   gem 'rdiscount'
 
-  gem 'rcov'
   gem 'ci_reporter', '~> 1.6'
 end
