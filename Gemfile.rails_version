@@ -3,13 +3,8 @@
 # application's Gemfile in addition to the main development Gemfile.
 if ENV['RAILS_VERSION']
   case ENV['RAILS_VERSION']
-  when /3.0$/
-    gem 'rails', '~> 3.0.0'
-    gem 'builder', '~> 2.1.2', :group => :resolver_hacks
-  when /3.1$/
-    gem 'rails', '~> 3.1.0'
-  when /3.2$/
-    gem 'rails', '~> 3.2.0.rc1'
+  when /4.0$/
+    gem 'rails', '~> 4.0.0'
   else
     fail "Unknown Rails version #{ENV['RAILS_VERSION']}"
   end
