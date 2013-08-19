@@ -20,7 +20,7 @@ module Aker::Rails
       include FileUtils
       include Spec::Matchers
 
-      APP_BASE = File.expand_path("../../../test-applications/serenity-30", __FILE__)
+      APP_BASE = File.expand_path("../../../test-applications/serenity-40", __FILE__)
       APP_PORT = 6363
 
       def self.base_uri
@@ -87,7 +87,7 @@ module Aker::Rails
       end
 
       def tmpdir
-        @tmpdir ||= "/tmp/aker-rails-rails3-integrated-tests"
+        @tmpdir ||= "/tmp/aker-rails-rails4-integrated-tests"
         unless File.exist?(@tmpdir)
           mkdir_p @tmpdir
           puts "Using tmpdir #{@tmpdir}"
