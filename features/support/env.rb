@@ -21,7 +21,7 @@ module Aker::Rails
       include Spec::Matchers
 
       APP_BASE = File.expand_path("../../../test-applications/serenity-40", __FILE__)
-      APP_PORT = 6363
+      APP_PORT = 27012
 
       def self.base_uri
         "http://localhost:#{APP_PORT}/"
