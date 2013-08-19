@@ -1,6 +1,6 @@
 ##
 # This file, being the same name as its parent gem, is required via
-# `Bundler.require` by the stock `config/application.rb` in a Rails 3
+# `Bundler.require` by the stock `config/application.rb` in a Rails 4
 # application.
 #
 # (Just a note as to why this file works: Railtie registration is implemented

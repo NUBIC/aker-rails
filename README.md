@@ -4,23 +4,23 @@ Aker-Rails
 `aker-rails` is the Rails plugin for Aker 3.0 and later.  It is a
 thin wrapper around Aker's rack support.
 
-There are separate plugins for Rails 3.x and Rails 2.3.x. You're
-looking at the version for **Rails 3.x**. The version for Rails 2.3.x
-has a version number with major version 2.
+There are separate plugins for Rails 4.x, Rails 3.x and Rails 2.3.x. You're
+looking at the version for **Rails 4.x**. The version for Rails 3.x has a
+version number with major version 3.
 
 Reader's note: this README uses [YARD][] markup to provide links to
 Aker-Rails' API documentation. If you aren't already, consider reading it
 on [rubydoc.info][] so that the links will be followable.
 
 [YARD]: http://yardoc.org/
-[rubydoc.info]: http://rubydoc.info/github/NUBIC/aker-rails/rails3/file/README.md
+[rubydoc.info]: http://rubydoc.info/github/NUBIC/aker-rails/rails4/file/README.md
 
 Setup
 -----
 
 ### Prerequisites
 
-`aker-rails` requires Rails ~> 3.0.
+`aker-rails` requires Rails ~> 4.0.
 
 Since `aker-rails` is just a thin wrapper, you'll want to be familiar
 with [Aker][] before you get started.
@@ -34,7 +34,7 @@ application's Gemfile:
 
     gem 'aker-rails'
 
-Between this and the `Bundler.require` that most Rails 3 applications do
+Between this and the `Bundler.require` that most Rails 4 applications do
 as part of their initialization process, that's all you usually need to
 do to get aker and aker-rails loaded in your Rails application.
 
@@ -58,9 +58,7 @@ environment you are using, like the portal name and the modes.
       portal :ENU
     end
 
-(Migration note: this differs from the Rails 2.3 version of this
-plugin. *Aker configuration should not happen in a Rails 3
-initializer.*)
+*Aker configuration should not happen in a Rails 4 initializer.*
 
 For more information on the configuration syntax and options, see the
 aker API documentation for `Aker::Configuration`.
@@ -86,10 +84,7 @@ will be env-specific.
       central '/etc/nubic/aker-prod.yml'
     end
 
-(Migration note: this differs from the Rails 2.3 version of this
-plugin. *Aker configuration should not happen in a Rails 3
-after_initialize block.*)
-
+*Aker configuration should not happen in a Rails 4 after_initialize block.*
 
 Integration into your app
 -------------------------
