@@ -1,8 +1,12 @@
 Aker-Rails History
 ==================
 
-3.0.3
+4.0.0
 -----
+
+### Features
+
+- Rails 4.0 support
 
 3.0.2
 -----
