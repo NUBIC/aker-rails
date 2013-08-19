@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 plugin_root = File.expand_path("../../..", __FILE__)
 
