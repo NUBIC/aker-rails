@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.version = Aker::Rails::VERSION
   s.platform = Gem::Platform::RUBY
   s.summary = "Easy Rails integration for the Aker security framework"
+  s.license = 'MIT'
 
   s.require_path = 'lib'
   s.files = Dir.glob("{CHANGELOG.md,README.md,{lib,spec,rails}/**/*}")
